@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="itsability_pinkgray">#E6CDC8</color>
+    <color name="itsability_pinkbright">#FFB9B0</color>
+    <color name="itsability_pink">#FFA492</color>
+    <color name="itsability_pinkmagenta">#FF7E5F</color>
+    <color name="itsability_pinkmagentadark">#E87058</color>
+    <color name="itsability_purplegray">#ADA1B3</color>
+    <color name="itsability_purplepale">#765285</color>
+    <color name="itsability_purple">#61427D</color>
+    <color name="itsability_purpledark">#351C4D</color>
+    <color name="itsability_purpleblack">#231233</color>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+    https://material.io/develop/android/components/bottom-navigation-view/
+    Material Design-Bottom Navigation의 Handling States를 참고하여 작성했습니다.
+
+    Bottom Navigation의 아이콘 색상을 지정하는데 사용됩니다.
+    -->
+
+    <item android:state_checked="true" android:color="@color/itsability_pink" />
+    <item android:color="@color/itsability_pinkgray" />
+</selector>

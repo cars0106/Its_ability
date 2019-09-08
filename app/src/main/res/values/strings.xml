@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">itsability</string>
+    <string name="bottom_home">홈</string>
+    <string name="bottom_ar">AR</string>
+    <string name="bottom_search">검색</string>
+    <string name="bottom_map">지도</string>
+    <string name="seoul_gangnam">강남구</string>
+    <string name="seoul_gangdong">강동구</string>
+    <string name="seoul_gangbuk">강북구</string>
+    <string name="seoul_gangseo">강서구</string>
+    <string name="seoul_gwanak">관악구</string>
+    <string name="seoul_gwangjin">광진구</string>
+    <string name="seoul_guro">구로구</string>
+    <string name="seoul_geumcheon">금천구</string>
+    <string name="seoul_nowon">노원구</string>
+    <string name="seoul_dobong">도봉구</string>
+    <string name="seoul_dongdaemun">동대문구</string>
+    <string name="seoul_dongjak">동작구</string>
+    <string name="seoul_mapo">마포구</string>
+    <string name="seoul_seodaemun">서대문구</string>
+    <string name="seoul_seocho">서초구</string>
+    <string name="seoul_seongdong">성동구</string>
+    <string name="seoul_seongbuk">성북구</string>
+    <string name="seoul_songpa">송파구</string>
+    <string name="seoul_yangcheon">양천구</string>
+    <string name="seoul_yeongdeungpo">영등포구</string>
+    <string name="seoul_yongsan">용산구</string>
+    <string name="seoul_eunpyeong">은평구</string>
+    <string name="seoul_jongno">종로구</string>
+    <string name="seoul_jung">중구</string>
+    <string name="seoul_jungnang">중랑구</string>
 </resources>

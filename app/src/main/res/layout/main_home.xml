@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+        https://thdev.tech/androiddev/2016/12/16/Android-BottomNavigationView-Intro/
+        BottomNavigationView의 버튼추가와 관련된 코드는 위의 사이트를 참고하였습니다.
+
+        app:menu : BottomNavigation에 버튼 연결
+        app:labelVisibilityMode : 버튼들의 텍스트들 보이게 설정
+        app:itemTextAppearanceActive / inActive : 글자크기 수정
+    -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+
+        app:itemIconTint="@drawable/colors_bottom_navigation"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
+        app:itemTextColor="@drawable/colors_bottom_navigation"
+
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</LinearLayout>
