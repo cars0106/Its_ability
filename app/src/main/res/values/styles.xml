@@ -31,7 +31,7 @@
 
     <!-- SplashActivity 구현 관련 -->
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@drawable/logo_screen</item>
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
 </resources>
