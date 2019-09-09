@@ -29,4 +29,9 @@
     <!-- Bottom Navigation의 Icon과 Title의 사이를 조정하기 위해 사용-->
     <dimen name="design_bottom_navigation_height" tools:override="true">52dp</dimen>
 
+    <!-- SplashActivity 구현 관련 -->
+    <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/logo_screen</item>
+    </style>
+
 </resources>
