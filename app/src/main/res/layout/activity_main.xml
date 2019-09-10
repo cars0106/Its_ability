@@ -62,6 +62,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!--
+            https://dev-imaec.tistory.com/27
+            RecyclerView의 구현에 관련된 코드는 위의 링크를 침조하여 작성했습니다.
+            -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
     </ScrollView>
 
