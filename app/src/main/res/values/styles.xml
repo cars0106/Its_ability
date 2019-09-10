@@ -25,9 +25,16 @@
         <item name="android:textSize">10sp</item>
     </style>
 
-
     <!-- Bottom Navigation의 Icon과 Title의 사이를 조정하기 위해 사용-->
     <dimen name="design_bottom_navigation_height" tools:override="true">52dp</dimen>
+
+    <!-- 상단 문구와 관련된 스타일 -->
+    <style name="Textstyle_MainTop" parent="@style/TextAppearance.MaterialComponents.Headline1">
+        <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textSize">25sp</item>
+    </style>
 
     <!-- SplashActivity 구현 관련 -->
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
