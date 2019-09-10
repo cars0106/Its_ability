@@ -7,6 +7,7 @@
         android:title="@string/bottom_home"
         android:icon="@drawable/ic_bottom_home_24dp"
         app:showAsAction="ifRoom"
+        android:checked="true"
         />
 
     <item
@@ -14,6 +15,7 @@
         android:title="@string/bottom_ar"
         android:icon="@drawable/ic_bottom_ar_24dp"
         app:showAsAction="ifRoom"
+        android:checked="false"
         />
 
     <item
@@ -21,6 +23,7 @@
         android:title="@string/bottom_search"
         android:icon="@drawable/ic_bottom_search_24dp"
         app:showAsAction="ifRoom"
+        android:checked="false"
         />
 
     <item
@@ -28,6 +31,7 @@
         android:title="@string/bottom_map"
         android:icon="@drawable/ic_bottom_map_24dp"
         app:showAsAction="ifRoom"
+        android:checked="false"
         />
 
 </menu>
