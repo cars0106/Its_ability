@@ -11,6 +11,7 @@
     <item
         android:id="@+id/list_item_splash"
         android:drawable="@drawable/ic_itsability"
+        android:left="50dp"
         android:width="100dp"
         android:height="100dp"
         android:gravity="center"
