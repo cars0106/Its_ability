@@ -9,6 +9,11 @@ import com.skt.Tmap.TMapView;
 
 public class MainMapActivity extends AppCompatActivity {
 
+    /*
+    https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
+    Vector Drawable에서 Bitmap 객체 받는 방법
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
