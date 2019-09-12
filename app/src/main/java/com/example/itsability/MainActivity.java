@@ -2,6 +2,7 @@ package com.example.itsability;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,18 +54,21 @@ public class MainActivity extends AppCompatActivity {
 
     //RecyclerView 구현과 관련된 메소드
     private void openRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.main_recyclerview);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
-            //*
+        /*
+        https://stackoverflow.com/questions/40003238/recyclerview-2-columns-with-cardview
+        Recycler View에서 두개의 줄을 만들기 위해서 LinearLayoutManager대신 GridLayoutManager를 사용합니다.
+        이 부분은 위의 StackOverFlow 링크를 참조했습니다.
+        */
+        RecyclerView recyclerView = findViewById(R.id.main_recyclerview);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2) {
             //RecyclerView의 Scroll을 막기 위함
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
-             //*/
         };
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(mLayoutManager);
 
         adapter = new RecyclerAdapter();
         addAdapterItem();

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <!--
     이 Layout은 RecyclerView 내부에서 하나의 항목이 될 ItemView입니다.
@@ -28,12 +29,10 @@
             android:layout_gravity="bottom"
             android:layout_marginStart="16dp"
 
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:textAppearance="@style/Textstyle_CardPlaceName"
-            android:textSize="20sp"
-            android:text="PlaceName"
             android:alpha="0.87"
-            />
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:text="PlaceName"
+            android:textAppearance="@style/Textstyle_CardPlaceName" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
