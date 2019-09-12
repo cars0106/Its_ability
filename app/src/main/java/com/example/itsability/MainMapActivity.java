@@ -14,18 +14,23 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainMapActivity extends AppCompatActivity {
+    View card;
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
@@ -40,12 +45,18 @@ public class MainMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
 
+        card = (View) findViewById(R.id.card);
+        card.setVisibility(View.INVISIBLE);
+
+        // TMap 생성
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
         TMapView tMapView = new TMapView(this);
 
         tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
         linearLayoutTmap.addView(tMapView);
+        tMapView.setMarkerRotate(true);
 
+        // 마커 생성
         TMapMarkerItem markerItem1 = new TMapMarkerItem();
 
         TMapPoint tMapPoint1 = new TMapPoint(37.496263, 126.959167); // 숭실대학교 창신관
@@ -59,6 +70,25 @@ public class MainMapActivity extends AppCompatActivity {
         markerItem1.setName("숭실대학교 창신관"); // 마커의 타이틀 지정
         markerItem1.setID("marker1");
         tMapView.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+        tMapView.setCenterPoint(126.959167, 37.496263);
+
+        // 마커 클릭 이벤트 설정
+        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+            @Override
+            public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                return false;
+            }
+
+            @Override
+            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                for (TMapMarkerItem item : arrayList) {
+                    card.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
+                }
+                Log.d("EndTest", " EndTest");
+                return false;
+            }
+        });
 
         //BottomNavigation 구현
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
