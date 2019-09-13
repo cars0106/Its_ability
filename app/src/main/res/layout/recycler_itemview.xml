@@ -16,8 +16,7 @@
         android:id="@+id/recycler_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:src="@drawable/kakaotalk_20190912_143049359_02" />
+        android:layout_gravity="top" />
 
     <LinearLayout
         android:layout_width="wrap_content"
