@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 "호텔캐슬",
                 "미디어스튜디오",
                 "남산타워"
-        );
+            );
 
         List<String> testAddr = Arrays.asList(
                 "서울특별시 동작구 상도로 369",
@@ -109,12 +109,29 @@ public class MainActivity extends AppCompatActivity {
                 "서울특별시 송파구 올림픽로 240",
                 "서울특별시 동작구 상도로 369",
                 "서울특별시 용산구 남산공원길 103"
-        );
+            );
+
+        List<String> testImageUrl = Arrays.asList(
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_01.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_02.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_03.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_04.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_05.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_06.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_07.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_08.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_09.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_10.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_11.jpg?raw=true",
+                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_12.jpg?raw=true"
+            );
 
         for(int i = 0; i<testName.size();i++) {
             RecyclerData t = new RecyclerData();
             t.setLocationName(testName.get(i));
             t.setLocationAddr(testAddr.get(i));
+            t.setImageUrl(testImageUrl.get(i));
 
             adapter.addItem(t);
 

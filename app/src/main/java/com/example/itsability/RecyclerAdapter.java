@@ -7,13 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
 import java.util.ArrayList;
 
 /*
 https://dev-imaec.tistory.com/27
 이 Java 코드는 RecyclerView에 데이터를 연결시키기 위한 RecyclerAdapter입니다.
 이 Java 코드는 위의 링크를 참조하여 작성되었습니다.
-*/
+        */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
 
@@ -54,21 +59,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
         private TextView textView_PlaceName;
         private TextView textView_PlaceAddr;
-        //private ImageView imageView;
+        private ImageView imageView_PlaceImage;
 
         ItemViewHolder(View itemView) {
             super(itemView);
 
             textView_PlaceName = itemView.findViewById(R.id.recycler_placeName);
             textView_PlaceAddr = itemView.findViewById(R.id.recycler_placeAddress);
-            //imageView = itemView.findViewById(R.id.imageView);
-        }
+            imageView_PlaceImage = itemView.findViewById(R.id.recycler_image);
+    }
 
         //View에 값을 Bind(할당, 연결) 시키는 메서드입니다.
         void onBind(RecyclerData data) {
             textView_PlaceName.setText(data.getLocationName());
             textView_PlaceAddr.setText(data.getLocationAddr());
-            //imageView.setImageResource(data.getImageUrl());
+            Glide.with(imageView_PlaceImage).load(data.getImageUrl()).into(imageView_PlaceImage);
         }
     }
 }

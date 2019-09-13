@@ -4,11 +4,11 @@ package com.example.itsability;
 public class RecyclerData {
     private String locationName;
     private String locationAddr;
-    //private String imageUrl;
+    private String imageUrl;
 
     public String getLocationName() {return locationName;}
     public String getLocationAddr() {return locationAddr;}
-    //public String getImageUrl() {return imageUrl;}
+    public String getImageUrl() {return imageUrl;}
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
@@ -18,9 +18,5 @@ public class RecyclerData {
         this.locationAddr = locationAddr;
     }
 
-    /*
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-     */
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 }
