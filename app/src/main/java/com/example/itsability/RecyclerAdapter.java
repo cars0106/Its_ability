@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 
 /*
@@ -64,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             textView_PlaceName = itemView.findViewById(R.id.recycler_placeName);
             textView_PlaceAddr = itemView.findViewById(R.id.recycler_placeAddress);
             imageView_PlaceImage = itemView.findViewById(R.id.recycler_image);
-    }
+        }
 
         //View에 값을 Bind(할당, 연결) 시키는 메서드입니다.
         /*
@@ -75,7 +79,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         void onBind(RecyclerData data) {
             textView_PlaceName.setText(data.getLocationName());
             textView_PlaceAddr.setText(data.getLocationAddr());
-            Glide.with(imageView_PlaceImage).load(data.getImageUrl()).thumbnail(0.3f).into(imageView_PlaceImage);
+            Glide.with(imageView_PlaceImage)
+                    .load(data.getImageUrl())
+                    .thumbnail(0.3f)
+                    .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(25)))
+                    .into(imageView_PlaceImage);
         }
     }
 }

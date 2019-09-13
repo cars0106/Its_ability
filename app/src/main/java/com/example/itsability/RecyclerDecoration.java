@@ -26,11 +26,11 @@ public class RecyclerDecoration extends RecyclerView.ItemDecoration {
         outRect.bottom = space;
 
         //맨 위에 두개의 사진에만 Top Margin을 적용하기 위한 코드이다.
-        if (layoutPos <= 1) {outRect.top = space; }
+        if (layoutPos <= 1) {outRect.top = space*2; }
         else { outRect.top = 0; }
 
         //왼쪽열에는 왼쪽,오른쪽 Margin을 모두 적용하고 오른쪽 열에는 Left Margin을 적용하지 않는다.
-        if(layoutPos%2==0) { outRect.left=space; outRect.right=space;}
-        else {outRect.left = 0; outRect.right=space;}
+        if(layoutPos%2==0) { outRect.left=space; outRect.right=space/2;}
+        else {outRect.left = space/2; outRect.right=space;}
     }
 }
