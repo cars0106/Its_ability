@@ -9,16 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
-
 import java.util.ArrayList;
 
 /*
 https://dev-imaec.tistory.com/27
 이 Java 코드는 RecyclerView에 데이터를 연결시키기 위한 RecyclerAdapter입니다.
 이 Java 코드는 위의 링크를 참조하여 작성되었습니다.
-        */
+*/
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
 
@@ -70,10 +67,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     }
 
         //View에 값을 Bind(할당, 연결) 시키는 메서드입니다.
+        /*
+        https://youngest-programming.tistory.com/25
+        ImageView에 사진을 할당할 때 Glide 라이브러리를 사용합니다.
+        Glide의 사용법은 위의 링크를 참조하시길 바랍니다.
+         */
         void onBind(RecyclerData data) {
             textView_PlaceName.setText(data.getLocationName());
             textView_PlaceAddr.setText(data.getLocationAddr());
-            Glide.with(imageView_PlaceImage).load(data.getImageUrl()).into(imageView_PlaceImage);
+            Glide.with(imageView_PlaceImage).load(data.getImageUrl()).thumbnail(0.3f).into(imageView_PlaceImage);
         }
     }
 }

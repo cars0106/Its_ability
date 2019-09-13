@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         https://stackoverflow.com/questions/40003238/recyclerview-2-columns-with-cardview
         Recycler View에서 두개의 줄을 만들기 위해서 LinearLayoutManager대신 GridLayoutManager를 사용합니다.
         이 부분은 위의 StackOverFlow 링크를 참조했습니다.
+
+        https://pupli.net/2017/07/31/android-recyclerview-gridlayoutmanager-column-spacing-by-itemdecoration/
+        Recycler View에서 줄 사이의 공백을 만드는데는 recyclerView.additemDecoration()을 사용합니다.
+        이 부분은 위의 링크를 참조했습니다.
         */
         RecyclerView recyclerView = findViewById(R.id.main_recyclerview);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2) {
@@ -69,10 +73,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new RecyclerDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_spacing)));
+
 
         adapter = new RecyclerAdapter();
         addAdapterItem();
         recyclerView.setAdapter(adapter);
+
 
 
     }

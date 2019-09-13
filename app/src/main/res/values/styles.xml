@@ -47,7 +47,7 @@
     <style name="Textstyle_CardPlaceAddress" parent="@style/TextAppearance.MaterialComponents.Headline2">
         <item name="android:fontFamily">@font/notosanscjkkr_regular</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">6sp</item>
         <item name="android:alpha">0.6</item>
     </style>
 
