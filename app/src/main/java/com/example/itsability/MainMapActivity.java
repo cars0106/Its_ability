@@ -56,20 +56,25 @@ public class MainMapActivity extends AppCompatActivity {
         linearLayoutTmap.addView(tMapView);
         tMapView.setMarkerRotate(true);
 
-        // 마커 생성
-        TMapMarkerItem markerItem1 = new TMapMarkerItem();
+        /*
+        https://community.openapi.sk.com/t/marker/7010/4
+        다중 마커 생성
+         */
 
-        TMapPoint tMapPoint1 = new TMapPoint(37.496263, 126.959167); // 숭실대학교 창신관
+        ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
+        alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
+        alTMapPoint.add(new TMapPoint(37.576016, 126.976867)); // 광화문
+        alTMapPoint.add(new TMapPoint(37.570432, 126.992169)); // 종로3가
+        alTMapPoint.add(new TMapPoint(37.570194, 126.983045)); // 종로5가
 
-        // 마커 아이콘
-        Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin);
+        final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
 
-        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
-        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
-        markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
-        markerItem1.setName("숭실대학교 창신관"); // 마커의 타이틀 지정
-        markerItem1.setID("marker1");
-        tMapView.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+        for(int i = 0; i < alTMapPoint.size(); i++) {
+            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+            markerItem1.setIcon(bitmap);
+            markerItem1.setTMapPoint(alTMapPoint.get(i));
+            tMapView.addMarkerItem("markerItem" + i, markerItem1);
+        }
         tMapView.setCenterPoint(126.959167, 37.496263);
 
         // 마커 클릭 이벤트 설정
