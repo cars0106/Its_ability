@@ -36,7 +36,9 @@ import java.util.ArrayList;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View card;
+
     final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
+    private TMapView tMapView;
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
@@ -65,8 +67,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
         // TMap 생성
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
-        TMapView tMapView = new TMapView(this);
-
+        tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
         linearLayoutTmap.addView(tMapView);
         tMapView.setMarkerRotate(true);
@@ -149,6 +150,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
         try {
             Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
             }
         catch (SecurityException e) {
             e.printStackTrace();
@@ -170,10 +172,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
     class GPSListener implements LocationListener {
         @Override
-        public void onLocationChanged(Location location) {
-            Double latitude = location.getLatitude();
-            Double longitude = location.getLongitude();
-        }
+        public void onLocationChanged(Location location) { }
 
         @Override
         public void onProviderDisabled(String provider) { }
