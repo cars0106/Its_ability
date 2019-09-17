@@ -12,6 +12,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -29,12 +34,16 @@ import com.skt.Tmap.TMapView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainMapActivity extends AppCompatActivity {
+public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View card;
+    final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
     Vector Drawable에서 Bitmap 객체 받는 방법
+
+    https://github.com/mike-jung/DoItAndroid/blob/master/part2/chapter14/SampleLocation/app/src/main/java/org/techtown/location/MainActivity.java
+    GPS 설정 및 Auto permission 참고 자료
 
     http://tmapapi.sktelecom.com/main.html#android/docs/androidDoc.TMapView_OnClickListenerCallback
     T-map api 가이드
@@ -45,8 +54,14 @@ public class MainMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
 
+        // Card 객체 생성 및 visibility 속성 변경
         card = (View) findViewById(R.id.card);
         card.setVisibility(View.INVISIBLE);
+
+        //현재 위치 설정
+        startLocationService();
+
+        AutoPermissions.Companion.loadAllPermissions(this, 101);
 
         // TMap 생성
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
@@ -61,13 +76,11 @@ public class MainMapActivity extends AppCompatActivity {
         다중 마커 생성
          */
 
-        ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
+        final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
         alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
         alTMapPoint.add(new TMapPoint(37.576016, 126.976867)); // 광화문
         alTMapPoint.add(new TMapPoint(37.570432, 126.992169)); // 종로3가
         alTMapPoint.add(new TMapPoint(37.570194, 126.983045)); // 종로5가
-
-        final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
 
         for(int i = 0; i < alTMapPoint.size(); i++) {
             TMapMarkerItem markerItem1 = new TMapMarkerItem();
@@ -75,7 +88,7 @@ public class MainMapActivity extends AppCompatActivity {
             markerItem1.setTMapPoint(alTMapPoint.get(i));
             tMapView.addMarkerItem("markerItem" + i, markerItem1);
         }
-        tMapView.setCenterPoint(126.959167, 37.496263);
+        tMapView.setCenterPoint(126.959167,37.496263);
 
         // 마커 클릭 이벤트 설정
         tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
@@ -130,4 +143,63 @@ public class MainMapActivity extends AppCompatActivity {
 
         return bitmap;
     }
+
+    public void startLocationService() {
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        try {
+            Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+        catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        GPSListener gpsListener = new GPSListener();
+        long minTime = 1000;
+        float minDistance = 0;
+
+        try {
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+        }
+        catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getApplicationContext(), "내 위치확인 요청함", Toast.LENGTH_SHORT).show();
+    }
+
+    class GPSListener implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+            Double latitude = location.getLatitude();
+            Double longitude = location.getLongitude();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) { }
+
+        @Override
+        public void onProviderEnabled(String provider) { }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
+    }
+
+    @Override
+    public void onDenied(int requestCode, @NonNull String[] permissions) {
+        Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onGranted(int requestCode, @NonNull String[] permissions) {
+        Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
+    }
+
 }
