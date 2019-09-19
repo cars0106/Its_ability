@@ -37,7 +37,6 @@ import java.util.ArrayList;
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View card;
 
-    final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
     private TMapView tMapView;
 
     /*
@@ -67,19 +66,20 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             //현재 위치 설정
             startLocationService();
 
-            AutoPermissions.Companion.loadAllPermissions(this, 101);
-
             // TMap 생성
             LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
+
+            final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
+
             tMapView = new TMapView(this);
             tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
             linearLayoutTmap.addView(tMapView);
             tMapView.setMarkerRotate(true);
 
-        /*
-        https://community.openapi.sk.com/t/marker/7010/4
-        다중 마커 생성
-         */
+            /*
+            https://community.openapi.sk.com/t/marker/7010/4
+            다중 마커 생성
+            */
 
             final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
             alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
@@ -99,6 +99,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
                 @Override
                 public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                    card.setVisibility(View.INVISIBLE);
                     return false;
                 }
 
@@ -160,37 +161,32 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
         try {
             Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+            if (location != null) {
+                tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
             }
-        catch (SecurityException e) {
-            e.printStackTrace();
-        }
 
-        GPSListener gpsListener = new GPSListener();
-        long minTime = 1000;
-        float minDistance = 0;
+            GPSListener gpsListener = new GPSListener();
+            long minTime = 1000;
+            float minDistance = 0;
 
-        try {
             manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+            tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+
+            Toast.makeText(getApplicationContext(), "내 위치확인 요청함", Toast.LENGTH_SHORT).show();
+
         }
-        catch (SecurityException e) {
+        catch(SecurityException e) {
             e.printStackTrace();
         }
-
-        Toast.makeText(getApplicationContext(), "내 위치확인 요청함", Toast.LENGTH_SHORT).show();
     }
 
     class GPSListener implements LocationListener {
-        @Override
         public void onLocationChanged(Location location) { }
 
-        @Override
         public void onProviderDisabled(String provider) { }
 
-        @Override
         public void onProviderEnabled(String provider) { }
 
-        @Override
         public void onStatusChanged(String provider, int status, Bundle extras) { }
     }
 
@@ -210,5 +206,4 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
     public void onGranted(int requestCode, @NonNull String[] permissions) {
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
     }
-
 }
