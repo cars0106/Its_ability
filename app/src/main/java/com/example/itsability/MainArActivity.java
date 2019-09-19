@@ -1,14 +1,13 @@
 package com.example.itsability;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainArActivity extends AppCompatActivity {
 
     //RecyclerView 구현을 위한 Adapter
     private RecyclerAdapter adapter;
@@ -24,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        
+        setContentView(R.layout.activity_main_arsupport);
 
         openRecyclerView();
 
@@ -39,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_home:
                         return true;
                     case R.id.action_ar:
-                        Intent arIntent = new Intent(getApplicationContext(),MainArActivity.class);
-                        startActivity(arIntent);
                         return true;
                     case R.id.action_search:
                         return true;

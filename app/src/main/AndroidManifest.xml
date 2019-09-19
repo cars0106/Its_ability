@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainMapActivity"></activity>
+        <activity android:name=".MainArActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"

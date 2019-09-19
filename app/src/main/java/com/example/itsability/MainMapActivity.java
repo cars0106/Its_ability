@@ -56,58 +56,68 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
 
-        // Card 객체 생성 및 visibility 속성 변경
-        card = (View) findViewById(R.id.card);
-        card.setVisibility(View.INVISIBLE);
 
-        //현재 위치 설정
-        startLocationService();
+        try {
 
-        AutoPermissions.Companion.loadAllPermissions(this, 101);
+            // Card 객체 생성 및 visibility 속성 변경
+            card = (View) findViewById(R.id.card);
+            card.setVisibility(View.INVISIBLE);
 
-        // TMap 생성
-        LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
-        tMapView = new TMapView(this);
-        tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
-        linearLayoutTmap.addView(tMapView);
-        tMapView.setMarkerRotate(true);
+
+            //현재 위치 설정
+            startLocationService();
+
+            AutoPermissions.Companion.loadAllPermissions(this, 101);
+
+            // TMap 생성
+            LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
+            tMapView = new TMapView(this);
+            tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
+            linearLayoutTmap.addView(tMapView);
+            tMapView.setMarkerRotate(true);
 
         /*
         https://community.openapi.sk.com/t/marker/7010/4
         다중 마커 생성
          */
 
-        final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
-        alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
-        alTMapPoint.add(new TMapPoint(37.576016, 126.976867)); // 광화문
-        alTMapPoint.add(new TMapPoint(37.570432, 126.992169)); // 종로3가
-        alTMapPoint.add(new TMapPoint(37.570194, 126.983045)); // 종로5가
+            final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
+            alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
+            alTMapPoint.add(new TMapPoint(37.576016, 126.976867)); // 광화문
+            alTMapPoint.add(new TMapPoint(37.570432, 126.992169)); // 종로3가
+            alTMapPoint.add(new TMapPoint(37.570194, 126.983045)); // 종로5가
 
-        for(int i = 0; i < alTMapPoint.size(); i++) {
-            TMapMarkerItem markerItem1 = new TMapMarkerItem();
-            markerItem1.setIcon(bitmap);
-            markerItem1.setTMapPoint(alTMapPoint.get(i));
-            tMapView.addMarkerItem("markerItem" + i, markerItem1);
-        }
-        tMapView.setCenterPoint(126.959167,37.496263);
-
-        // 마커 클릭 이벤트 설정
-        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
-            @Override
-            public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                return false;
+            for (int i = 0; i < alTMapPoint.size(); i++) {
+                TMapMarkerItem markerItem1 = new TMapMarkerItem();
+                markerItem1.setIcon(bitmap);
+                markerItem1.setTMapPoint(alTMapPoint.get(i));
+                tMapView.addMarkerItem("markerItem" + i, markerItem1);
             }
+            tMapView.setCenterPoint(126.959167, 37.496263);
 
-            @Override
-            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                for (TMapMarkerItem item : arrayList) {
-                    card.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
+            // 마커 클릭 이벤트 설정
+            tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+                @Override
+                public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                    return false;
                 }
-                Log.d("EndTest", " EndTest");
-                return false;
-            }
-        });
+
+                @Override
+                public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                    for (TMapMarkerItem item : arrayList) {
+                        card.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
+                    }
+                    Log.d("EndTest", " EndTest");
+                    return false;
+                }
+            });
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
 
         //BottomNavigation 구현
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
