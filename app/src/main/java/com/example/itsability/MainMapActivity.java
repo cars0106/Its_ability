@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View card;
+    TextView textView;
 
     private TMapView tMapView;
 
@@ -62,14 +64,15 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             card = (View) findViewById(R.id.card);
             card.setVisibility(View.INVISIBLE);
 
+            textView = findViewById(R.id.textView);
 
             //현재 위치 설정
             startLocationService();
 
+            AutoPermissions.Companion.loadAllPermissions(this, 101);
+
             // TMap 생성
             LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
-
-            final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
 
             tMapView = new TMapView(this);
             tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
@@ -80,6 +83,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             https://community.openapi.sk.com/t/marker/7010/4
             다중 마커 생성
             */
+            final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
 
             final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
             alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
@@ -162,26 +166,39 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         try {
             Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
-                tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                String message = "최근 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
+
+                textView.setText(message);
+
+
             }
 
             GPSListener gpsListener = new GPSListener();
             long minTime = 1000;
             float minDistance = 0;
 
-            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
-            tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+            manager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    minTime, minDistance, gpsListener);
 
-            Toast.makeText(getApplicationContext(), "내 위치확인 요청함", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "내 위치확인 요청함",
+                    Toast.LENGTH_SHORT).show();
 
-        }
-        catch(SecurityException e) {
+        } catch(SecurityException e) {
             e.printStackTrace();
         }
     }
 
     class GPSListener implements LocationListener {
-        public void onLocationChanged(Location location) { }
+        public void onLocationChanged(Location location) {
+            Double latitude = location.getLatitude();
+            Double longitude = location.getLongitude();
+
+            String message = "내 위치 -> Latitude : "+ latitude + "\nLongitude:"+ longitude;
+            textView.setText(message);
+        }
 
         public void onProviderDisabled(String provider) { }
 
@@ -198,12 +215,12 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
     }
 
     @Override
-    public void onDenied(int requestCode, @NonNull String[] permissions) {
+    public void onDenied(int requestCode, String[] permissions) {
         Toast.makeText(this, "permissions denied : " + permissions.length, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onGranted(int requestCode, @NonNull String[] permissions) {
+    public void onGranted(int requestCode, String[] permissions) {
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
     }
 }
