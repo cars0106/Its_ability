@@ -2,6 +2,7 @@ package com.example.itsability;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -18,12 +19,19 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
@@ -36,7 +44,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
-    View card;
+    View mapCard;
     TextView textView;
 
     private TMapView tMapView;
@@ -60,15 +68,14 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
         try {
 
-            // Card 객체 생성 및 visibility 속성 변경
-            card = (View) findViewById(R.id.card);
-            card.setVisibility(View.INVISIBLE);
 
+            // Card 객체 생성 및 visibility 속성 변경
+            mapCard = (View) findViewById(R.id.map_card);
+            mapCard.setVisibility(View.INVISIBLE);
             textView = findViewById(R.id.textView);
 
             //현재 위치 설정
             startLocationService();
-
             AutoPermissions.Companion.loadAllPermissions(this, 101);
 
             // TMap 생성
@@ -103,14 +110,22 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
                 @Override
                 public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                    card.setVisibility(View.INVISIBLE);
+
+                    mapCard.setVisibility(View.INVISIBLE);
+                    ImageView cardImage = (ImageView)findViewById(R.id.map_cardImage);
+                    Glide.with(cardImage)
+                            .load("https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true")
+                            .thumbnail(0.3f)
+                            .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(25)))
+                            .into(cardImage);
+
                     return false;
                 }
 
                 @Override
                 public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
                     for (TMapMarkerItem item : arrayList) {
-                        card.setVisibility(View.VISIBLE);
+                        mapCard.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
                     }
                     Log.d("EndTest", " EndTest");
