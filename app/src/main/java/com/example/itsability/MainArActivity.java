@@ -1,8 +1,11 @@
 package com.example.itsability;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,7 @@ public class MainArActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_arsupport);
+        setStatusBarColor(this, R.color.itsability_purpleblack);
 
         openRecyclerView();
 
@@ -34,6 +38,7 @@ public class MainArActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_home:
+                        finish();
                         return true;
                     case R.id.action_ar:
                         return true;
@@ -141,5 +146,12 @@ public class MainArActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    public static void setStatusBarColor(Activity activity, int color) {
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(color);
     }
 }
