@@ -174,13 +174,12 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         try {
             Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
+
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+
                 String message = "최근 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
-
                 textView.setText(message);
-
-
             }
 
             GPSListener gpsListener = new GPSListener();
@@ -200,12 +199,18 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
     }
 
     class GPSListener implements LocationListener {
+
+        private boolean didMapCenter = false;
+
         public void onLocationChanged(Location location) {
             Double latitude = location.getLatitude();
             Double longitude = location.getLongitude();
 
             //지도 중심점 현재 위치로 설정
-            tMapView.setCenterPoint(longitude,latitude);
+            if(didMapCenter == false) {
+                tMapView.setCenterPoint(longitude,latitude);
+                didMapCenter = true;
+            }
 
             String message = "내 위치 -> Latitude : "+ latitude + "\nLongitude:"+ longitude;
             textView.setText(message);
