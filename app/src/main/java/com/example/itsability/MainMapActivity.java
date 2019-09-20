@@ -2,27 +2,22 @@ package com.example.itsability;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,7 +35,6 @@ import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
@@ -104,7 +98,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 markerItem1.setTMapPoint(alTMapPoint.get(i));
                 tMapView.addMarkerItem("markerItem" + i, markerItem1);
             }
-            tMapView.setCenterPoint(126.959167, 37.496263);
 
             // 마커 클릭 이벤트 설정
             tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
@@ -210,6 +203,9 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         public void onLocationChanged(Location location) {
             Double latitude = location.getLatitude();
             Double longitude = location.getLongitude();
+
+            //지도 중심점 현재 위치로 설정
+            tMapView.setCenterPoint(longitude,latitude);
 
             String message = "내 위치 -> Latitude : "+ latitude + "\nLongitude:"+ longitude;
             textView.setText(message);
