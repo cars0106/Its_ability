@@ -7,7 +7,7 @@
         android:title="@string/bottom_home"
         android:icon="@drawable/ic_bottom_home_24dp"
         app:showAsAction="ifRoom"
-        android:checked="true"
+        android:checked="false"
         />
 
     <item

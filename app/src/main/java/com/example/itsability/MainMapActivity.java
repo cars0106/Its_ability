@@ -134,6 +134,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
         //BottomNavigation 구현
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(3).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
