@@ -10,7 +10,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- 상태바 관련 -->
-        <item name="android:statusBarColor">#FFA492</item>
+        <item name="android:statusBarColor">@color/itsability_pink</item>
     </style>
 
 

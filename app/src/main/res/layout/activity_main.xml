@@ -64,7 +64,7 @@
                     android:id="@+id/main_toptext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:text="당신이 찍고싶은\n인생샷을 찾아보세요"
