@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_home:
                         return true;
                     case R.id.action_ar:
-                        Intent arIntent = new Intent(getApplicationContext(),MainArActivity.class);
+                        Intent arIntent = new Intent(getApplicationContext(),PlaceDescriptionActivity.class);
                         startActivity(arIntent);
                         return true;
                     case R.id.action_search:

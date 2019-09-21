@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/main_topimg"
+                    android:id="@+id/place_PlaceMainImage"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -74,7 +74,7 @@
                     android:textAlignment="textEnd"
                     android:textAppearance="@style/Textstyle_MainTop"
                     app:layout_constraintBottom_toBottomOf="@+id/main_topicon"
-                    app:layout_constraintEnd_toEndOf="@+id/main_topimg" />
+                    app:layout_constraintEnd_toEndOf="@+id/place_PlaceMainImage" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
