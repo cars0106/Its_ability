@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(arIntent);
                         return true;
                     case R.id.action_search:
+                        Intent searchIntent = new Intent(getApplicationContext(),MainSearchActivity.class);
+                        startActivity(searchIntent);
                         return true;
                     case R.id.action_map:
                         Intent mapIntent = new Intent(getApplicationContext(), MainMapActivity.class);

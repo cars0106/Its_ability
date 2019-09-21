@@ -143,8 +143,12 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                         startActivity(mainIntent);
                         return true;
                     case R.id.action_ar:
+                        Intent arIntent = new Intent(getApplicationContext(),MainArActivity.class);
+                        startActivity(arIntent);
                         return true;
                     case R.id.action_search:
+                        Intent searchIntent = new Intent(getApplicationContext(),MainSearchActivity.class);
+                        startActivity(searchIntent);
                         return true;
                     case R.id.action_map:
                         return true;

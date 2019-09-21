@@ -38,11 +38,14 @@ public class MainArActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        finish();
+                        Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(mainIntent);
                         return true;
                     case R.id.action_ar:
                         return true;
                     case R.id.action_search:
+                        Intent searchIntent = new Intent(getApplicationContext(),MainSearchActivity.class);
+                        startActivity(searchIntent);
                         return true;
                     case R.id.action_map:
                         Intent mapIntent = new Intent(getApplicationContext(), MainMapActivity.class);
