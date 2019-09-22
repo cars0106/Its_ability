@@ -6,20 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.widget.LinearLayout
-        android:id="@+id/linearLayout"
+    <LinearLayout
+        android:id="@+id/linearLayoutTmap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainMapActivity">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutTmap"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
-
-    </android.widget.LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -36,47 +31,92 @@
         app:itemTextColor="@drawable/colors_bottom_navigation"
 
         app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu">
 
-    <com.google.android.material.card.MaterialCardView
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <com.example.itsability.PlaceCardView
         android:id="@+id/map_card"
         style="@style/CardView"
         android:layout_width="0dp"
         android:layout_height="240dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/card_shadow"
         app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
-            <ImageView
+            <com.example.itsability.PlaceCardImageView
                 android:id="@+id/map_cardImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.8"
-                />
+                android:layout_weight="0.8" />
 
-            <TextView
-                android:id="@+id/textView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-                android:layout_weight="0.2" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
 
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/place_cardPlaceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:alpha="0.87"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:text="PlaceName"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="2dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.6"
+                        android:text="5호선 광화문역"
+                        android:textAppearance="@style/Textstyle_MapCardPlaceDescription" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:alpha="0.6"
+                        android:text="서울특별시 종로구 창신동"
+                        android:textAppearance="@style/Textstyle_MapCardPlaceDescription" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.example.itsability.PlaceCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

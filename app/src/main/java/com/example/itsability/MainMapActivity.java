@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pedro.library.AutoPermissions;
@@ -66,7 +65,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             // Card 객체 생성 및 visibility 속성 변경
             mapCard = (View) findViewById(R.id.map_card);
             mapCard.setVisibility(View.INVISIBLE);
-            textView = findViewById(R.id.textView);
+            textView = findViewById(R.id.place_cardPlaceName);
 
             //현재 위치 설정
             startLocationService();
@@ -109,7 +108,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                     Glide.with(cardImage)
                             .load("https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true")
                             .thumbnail(0.3f)
-                            .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(25)))
+                            .apply(new RequestOptions().transform(new CenterCrop()))
                             .into(cardImage);
 
                     return false;
@@ -177,7 +176,9 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         try {
+            /*
             Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
             if (location != null) {
 
                 double latitude = location.getLatitude();
@@ -186,6 +187,8 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 String message = "최근 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
                 textView.setText(message);
             }
+            */
+
 
             GPSListener gpsListener = new GPSListener();
             long minTime = 1000;
@@ -217,8 +220,11 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 didMapCenter = true;
             }
 
+            /*
             String message = "내 위치 -> Latitude : "+ latitude + "\nLongitude:"+ longitude;
             textView.setText(message);
+
+             */
         }
 
         public void onProviderDisabled(String provider) { }
