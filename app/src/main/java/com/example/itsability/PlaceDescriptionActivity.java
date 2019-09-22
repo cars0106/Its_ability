@@ -6,13 +6,19 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapOverlay;
 import com.skt.Tmap.TMapPoint;
@@ -22,6 +28,8 @@ import com.skt.Tmap.TMapView;
 public class PlaceDescriptionActivity extends AppCompatActivity {
 
     private TMapView tMapView;
+    private CardView cardView;
+    private ImageView placeMainImageView;
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
@@ -41,35 +49,46 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         //*
         try {
+            //PlaceMainImage 설정
+            placeMainImageView = (ImageView)findViewById(R.id.place_PlaceMainImage);
+            Glide.with(placeMainImageView)
+                    .load("https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true")
+                    .thumbnail(0.3f)
+                    .apply(new RequestOptions().transform(new CenterCrop()))
+                    .into(placeMainImageView);
+
+
+
+            // TMap 생성 후 CardView에 추가
+            tMapView = new TMapView(this) {
+                @Override
+                protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+                    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+                    int width = getMeasuredWidth();
+                    int height = (int)(width * 0.4);
+                    setMeasuredDimension(width,height);
+                }
+            };
+            cardView = (CardView)findViewById(R.id.place_placeMapCard);
+            cardView.addView(tMapView);
 
             TMapPoint currentPlacePoint = new TMapPoint(37.570194, 126.983045);
-
-
-            // TMap 생성
-            tMapView = (TMapView)findViewById(R.id.place_placeMap);
             tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
             tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
             tMapView.setMarkerRotate(true);
 
+            //TMap에 Marker 추가
             final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
-
-             // 종로5가
             TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
             currentPlaceMarker.setIcon(bitmap);
             currentPlaceMarker.setTMapPoint(currentPlacePoint);
             tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         //*/
-
-        /*
-        TMapOverlay tMapOverlay = new TMapOverlay();
-        tMapOverlay.draw(new Canvas().drawRoundRect(new RectF(100,100,100,100),10,10,),tMapView,false);
-
-         */
-
 
 
     }

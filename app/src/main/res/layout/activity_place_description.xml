@@ -46,30 +46,35 @@
                 android:layout_margin="13dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/place_placeName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-3dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:text="청계천"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content ">
 
                     <ImageView
                         android:id="@+id/imageView2"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:layout_marginStart="1dp"
+                        android:layout_marginBottom="8dp"
                         android:alpha="0.68"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/place_placeName"
                         app:srcCompat="@drawable/ic_locationpin_24dp" />
+
+                    <TextView
+                        android:id="@+id/place_placeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:fontFamily="@font/notosanscjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:padding="0dp"
+                        android:text="청계천"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/place_placeAddress"
@@ -105,14 +110,7 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp"
-                    app:cardMaxElevation="0dp">
-
-                    <com.skt.Tmap.TMapView
-                        android:id="@+id/place_placeMap"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@drawable/round_map"></com.skt.Tmap.TMapView>
-                </androidx.cardview.widget.CardView>
+                    app:cardMaxElevation="0dp"/>
 
             </LinearLayout>
 
