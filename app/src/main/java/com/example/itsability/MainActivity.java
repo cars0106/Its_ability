@@ -7,8 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.gesture.Gesture;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         Recycler View에서 줄 사이의 공백을 만드는데는 recyclerView.additemDecoration()을 사용합니다.
         이 부분은 위의 링크를 참조했습니다.
         */
+
         RecyclerView recyclerView = findViewById(R.id.main_recyclerview);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2) {
             //RecyclerView의 Scroll을 막기 위함
@@ -79,6 +84,42 @@ public class MainActivity extends AppCompatActivity {
         };
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new RecyclerDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_spacing)));
+
+        /*
+        https://onlyformylittlefox.tistory.com/9?category=556987
+        RecyclerView의 OnItemTouchListener 구현과 관련된 참고문서입니다.
+        아직 미구현된 부분입니다. 추후 구현 예정입니다.
+
+        RecyclerView.OnItemTouchListener onRecyclerViewItemTouchListener = new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+                GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent e) {return true;}
+                });
+                View clickedChildView = rv.findChildViewUnder(e.getX(),e.getY());
+
+                if(clickedChildView != null && gestureDetector.onTouchEvent(e)) {
+                    int currentPosition = rv.getChildAdapterPosition(clickedChildView);
+
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        }
+
+         */
+
 
 
         adapter = new RecyclerAdapter();
