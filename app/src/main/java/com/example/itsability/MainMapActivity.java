@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -154,6 +155,16 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                         return true;
                 }
                 return false;
+            }
+        });
+
+        //Card 누르면 설명 화면으로 넘어가기
+        mapCard.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Intent placeDescription = new Intent(getApplicationContext(),PlaceDescriptionActivity.class);
+                startActivity(placeDescription);
+                return true;
             }
         });
     }
