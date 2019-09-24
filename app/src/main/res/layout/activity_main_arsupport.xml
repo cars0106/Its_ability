@@ -68,7 +68,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:text="당신이 찍고싶은 인생샷\nAR이 도와줄게요"
                     android:textAlignment="textEnd"

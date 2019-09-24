@@ -50,6 +50,18 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@color/itsability_pink" />
 
+                <TextView
+                    android:id="@+id/main_toptext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:text="당신의 인생샷 스팟\n우리가 찾아줄게요"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/Textstyle_MainTop"
+                    app:layout_constraintBottom_toBottomOf="@+id/main_topicon"
+                    app:layout_constraintEnd_toEndOf="@+id/place_PlaceMainImage" />
+
                 <ImageView
                     android:id="@+id/main_topicon"
                     android:layout_width="150dp"
@@ -59,20 +71,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_itsability" />
-
-                <TextView
-                    android:id="@+id/main_toptext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:text="당신의 인생샷 스팟\n우리가 찾아줄게요"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/Textstyle_MainTop"
-                    android:textSize="27sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/main_topicon"
-                    app:layout_constraintEnd_toEndOf="@+id/place_PlaceMainImage" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,8 +31,8 @@ public class PlaceSearchActivity extends AppCompatActivity {
         //이전 Activity에서 putExtra로 넘긴값 받아오기
         Bundle p = getIntent().getExtras();
         topText = (TextView)findViewById(R.id.main_toptext);
-        topText.setText(p.getString("location"));
-
+        topText.setTextSize(25);
+        topText.setText("서울시 " + getString(getResources().getIdentifier(p.getString("location"),"string",getPackageName()))+"에서\n인생샷 스팟을 찾아보세요");
         openRecyclerView();
 
         //BottomNavigation 구현
