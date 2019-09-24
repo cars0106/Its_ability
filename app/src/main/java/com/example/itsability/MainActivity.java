@@ -87,7 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Toast.makeText(getApplicationContext(), position+"번째 아이템 클릭", Toast.LENGTH_SHORT).show();
+                        RecyclerData data = adapter.returnItem(position);
+                        Intent placeDescriptionIntent = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
+                        placeDescriptionIntent.putExtra("placeName",data.getLocationName());
+                        placeDescriptionIntent.putExtra("placeAddr",data.getLocationAddr());
+                        startActivity(placeDescriptionIntent);
                     }
                 })
         );

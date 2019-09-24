@@ -54,6 +54,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         recyclerDataList.add(data);
     }
 
+    public RecyclerData returnItem(int index) {
+        //recyclerDataList에서 특정 인덱스에 있는 데이터를 반환합니다.
+        return recyclerDataList.get(index);
+    }
+
     // RecyclerView의 핵심인 ViewHolder 입니다.
     // 여기서 subView를 setting 해줍니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {

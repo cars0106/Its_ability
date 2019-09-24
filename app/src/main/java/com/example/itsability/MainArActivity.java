@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -80,6 +81,19 @@ public class MainArActivity extends AppCompatActivity {
         };
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new RecyclerDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_spacing)));
+        //RecyclerView에 ItemTouchListener를 추가합니다.
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        RecyclerData data = adapter.returnItem(position);
+                        Intent placeDescriptionIntent = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
+                        placeDescriptionIntent.putExtra("placeName",data.getLocationName());
+                        placeDescriptionIntent.putExtra("placeAddr",data.getLocationAddr());
+                        startActivity(placeDescriptionIntent);
+                    }
+                })
+        );
 
 
         adapter = new RecyclerAdapter();
