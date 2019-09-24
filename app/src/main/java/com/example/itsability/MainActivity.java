@@ -3,16 +3,13 @@ package com.example.itsability;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.gesture.Gesture;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -85,41 +82,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new RecyclerDecoration(getResources().getDimensionPixelSize(R.dimen.recycler_spacing)));
 
-        /*
-        https://onlyformylittlefox.tistory.com/9?category=556987
-        RecyclerView의 OnItemTouchListener 구현과 관련된 참고문서입니다.
-        아직 미구현된 부분입니다. 추후 구현 예정입니다.
-
-        RecyclerView.OnItemTouchListener onRecyclerViewItemTouchListener = new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-                GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+        //RecyclerView에 ItemTouchListener를 추가합니다.
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public boolean onSingleTapUp(MotionEvent e) {return true;}
-                });
-                View clickedChildView = rv.findChildViewUnder(e.getX(),e.getY());
-
-                if(clickedChildView != null && gestureDetector.onTouchEvent(e)) {
-                    int currentPosition = rv.getChildAdapterPosition(clickedChildView);
-
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        }
-
-         */
-
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getApplicationContext(), position+"번째 아이템 클릭", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
 
 
         adapter = new RecyclerAdapter();
