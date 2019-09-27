@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -17,6 +18,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -33,6 +40,10 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     private CardView cardView;
     private ImageView placeMainImageView;
 
+    private RequestQueue requestQueue;
+    private TextView textView;
+    private static final String TAG = "DESCRIPTION";
+
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
     Vector Drawable에서 Bitmap 객체 받는 방법
@@ -42,6 +53,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     http://tmapapi.sktelecom.com/main.html#android/docs/androidDoc.TMapView_OnClickListenerCallback
     T-map api 가이드
+
+    https://developer.android.com/training/volley/simple#java
+    Volley 가이드
      */
 
     @Override
@@ -94,6 +108,33 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         currentPlaceMarker.setTMapPoint(currentPlacePoint);
         tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
 
+        //Volley
+        textView = (TextView) findViewById(R.id.place_description_text);
+        requestQueue = Volley.newRequestQueue(this);
+        String url = "https://www.google.com";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                textView.setText(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Fail to Get StringRequest", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        stringRequest.setTag(TAG);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(requestQueue != null) {
+            requestQueue.cancelAll(TAG);
+        }
     }
 
     //벡터이미지에서 비트맵 변환

@@ -112,6 +112,12 @@
                     app:cardElevation="0dp"
                     app:cardMaxElevation="0dp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/place_description_text"
+                    android:text="Volley GET 결과 : " />
+
             </LinearLayout>
 
         </LinearLayout>
