@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -109,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     //Back-End 작업이 끝나면 서버에서 호출하여 가져온 값을 저장하도록 코드를 수정해야 합니다.
     private void addAdapterItem() {
 
+
         List<String> testName = Arrays.asList(
                 "숭실대학교",
                 "청계천",
@@ -124,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 "남산타워"
             );
 
+
         List<String> testAddr = Arrays.asList(
+
                 "서울특별시 동작구 상도로 369",
                 "서울특별시 종로구 창신동",
                 "서울특별시 서초구 반포동",
