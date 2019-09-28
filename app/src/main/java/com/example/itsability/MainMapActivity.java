@@ -187,20 +187,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         try {
-            /*
-            Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            if (location != null) {
-
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-
-                String message = "최근 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
-                textView.setText(message);
-            }
-            */
-
-
             GPSListener gpsListener = new GPSListener();
             long minTime = 1000;
             float minDistance = 0;
@@ -230,12 +216,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 tMapView.setCenterPoint(longitude,latitude);
                 didMapCenter = true;
             }
-
-            /*
-            String message = "내 위치 -> Latitude : "+ latitude + "\nLongitude:"+ longitude;
-            textView.setText(message);
-
-             */
         }
 
         public void onProviderDisabled(String provider) { }
@@ -260,5 +240,9 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
     @Override
     public void onGranted(int requestCode, String[] permissions) {
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
+    }
+
+    public void onButtonClicked(View view) {
+        startLocationService();
     }
 }
