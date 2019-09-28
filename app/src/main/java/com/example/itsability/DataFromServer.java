@@ -65,4 +65,18 @@ public class DataFromServer {
 
         return list;
     }
+
+    //Map Activity에 마커를 찍을때(모든 장소들의 W3W값을 가져와야 할 때) 사용합니다.
+    public List<String> returnAllW3WAddr() {
+
+        List<String> returnW3W = new ArrayList<>();
+
+        for(Map<String,Object> i : placeData) {
+            String w3w = i.get("W3W").toString();
+            w3w = w3w.substring(1,w3w.indexOf(",")-1);
+            returnW3W.add(w3w);
+        }
+
+        return returnW3W;
+    }
 }
