@@ -1,7 +1,10 @@
 package com.example.itsability;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -50,5 +53,16 @@ public class DataFromServer {
         }
 
         return url;
+    }
+
+    public List<String> returnW3WAddr(String LocationName) {
+        Map<String,Object> locationData = getDataFromLocationName(LocationName);
+
+        //Object를 String으로 바꾼 후, 이를 Substring, split으로 이용하여 배열의 형태로 변환
+        String origin = locationData.get("W3W").toString();
+        origin = origin.substring(1, origin.length() - 1);
+        List<String> list = Arrays.asList(origin.split(","));
+
+        return list;
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.skt.Tmap.TMapView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -109,43 +111,48 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         //Volley 로 해당 장소 위치 받아와서 Marker 추가
         DataFromServer dataFromServer = new DataFromServer();
-        Map<String, Object> data = dataFromServer.getDataFromLocationName(locationName);
-        String string = data.get("W3W").toString();
-        int end = string.length();
-        final String stringFinal = string.substring(1, end - 1);
+        List<String> w3wData = dataFromServer.returnW3WAddr(locationName);
 
-        requestLocationQueue = Volley.newRequestQueue(this);
-        String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ stringFinal +"&key=F4VVBXGP";
+        for (String i : w3wData) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject location = response.getJSONObject("coordinates");
+            requestLocationQueue = Volley.newRequestQueue(this);
+            String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ i.trim() +"&key=F4VVBXGP";
 
-                    String latitude = location.getString("lat");
-                    String longitude = location.getString("lng");
-                    TMapPoint currentPlacePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                    tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONObject location = response.getJSONObject("coordinates");
 
-                    TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
-                    currentPlaceMarker.setIcon(bitmap);
-                    currentPlaceMarker.setTMapPoint(currentPlacePoint);
-                    tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
+                        String latitude = location.getString("lat");
+                        String longitude = location.getString("lng");
+                        TMapPoint currentPlacePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                        tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
+
+                        TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
+                        currentPlaceMarker.setIcon(bitmap);
+                        currentPlaceMarker.setTMapPoint(currentPlacePoint);
+                        tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
+
+                        Log.d("TAG","MARKER ADDED");
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                catch (JSONException e) {
-                    e.printStackTrace();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
-            }
-        });
+            });
 
-        jsonObjectRequest.setTag(TAG);
-        requestLocationQueue.add(jsonObjectRequest);
+            jsonObjectRequest.setTag(TAG);
+            requestLocationQueue.add(jsonObjectRequest);
+
+        }
+
+
 
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
