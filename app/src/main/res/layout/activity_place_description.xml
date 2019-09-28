@@ -116,7 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/place_description_text"
-                    android:text="Volley GET 결과 : " />
+                    android:text="로딩중..."
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

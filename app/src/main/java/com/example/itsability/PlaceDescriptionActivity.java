@@ -152,8 +152,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         }
 
-
-
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
         requestInfoQueue = Volley.newRequestQueue(this);
@@ -164,7 +162,19 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject res = response.getJSONObject("response");
-                    textView.setText("result : " + res);
+                    JSONObject body = res.getJSONObject("body");
+                    JSONObject items = body.getJSONObject("items");
+                    JSONObject item = items.getJSONObject("item");
+                    String usefee = item.getString("usefee");
+                    String usetimeculture = item.getString("usetimeculture");
+                    String infocenterculture = item.getString("infocenterculture");
+                    String restdateculture = item.getString("restdateculture");
+                    String parkingculture = item.getString("parkingculture");
+                    String parkingfee = item.getString("parkingfee");
+
+                    String sum = "입장료 : " + usefee + "\n이용시간 : " + usetimeculture + "\n문의 및 안내 : " + infocenterculture +"\n쉬는날 : " + restdateculture + "\n주차 가능 여부 : " + parkingculture + "\n주차료 : " + parkingfee;
+                    sum = sum.replaceAll("<br \\/>", "");
+                    textView.setText(sum);
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
