@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -149,14 +150,14 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
         requestInfoQueue = Volley.newRequestQueue(this);
-        String url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D&contentTypeId=12&contentId=129507&MobileOS=AND&MobileApp=itsability&introYN=Y&_type=json";
+        String url2 = dataFromServer.returnTourAPIUrl(locationName);
 
         JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject res = response.getJSONObject("response");
-                    textView.setText("result" + res.toString());
+                    textView.setText("result : " + res);
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
@@ -165,7 +166,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Fail to Get Info JSONRequest", Toast.LENGTH_LONG).show();
+                textView.setVisibility(View.INVISIBLE);
             }
         });
 
