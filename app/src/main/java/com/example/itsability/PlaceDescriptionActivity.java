@@ -155,8 +155,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject body = response.getJSONObject("body");
-                    textView.setText("result" + body);
+                    JSONObject res = response.getJSONObject("response");
+                    textView.setText("result" + res.toString());
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
@@ -168,6 +168,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Fail to Get Info JSONRequest", Toast.LENGTH_LONG).show();
             }
         });
+
+        jsonObjectRequestInfo.setTag(TAG);
+        requestInfoQueue.add(jsonObjectRequestInfo);
     }
 
     @Override
@@ -175,6 +178,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         super.onStop();
         if (requestLocationQueue != null) {
             requestLocationQueue.cancelAll(TAG);
+        }
+        if (requestInfoQueue != null) {
+            requestInfoQueue.cancelAll(TAG);
         }
     }
 
