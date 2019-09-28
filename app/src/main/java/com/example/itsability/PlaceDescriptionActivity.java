@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -33,6 +34,12 @@ import com.skt.Tmap.TMapOverlay;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.Map;
+
 
 public class PlaceDescriptionActivity extends AppCompatActivity {
 
@@ -42,6 +49,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private TextView textView;
+
+    private String locationName;
     private static final String TAG = "DESCRIPTION";
 
     /*
@@ -67,7 +76,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         if(getIntent().hasExtra("placeName")) {
             TextView placeName = (TextView)findViewById(R.id.place_placeName);
             TextView placeAddr = (TextView)findViewById(R.id.place_placeAddress);
-            placeName.setText(bundle.getString("placeName"));
+            locationName = bundle.getString("placeName");
+            placeName.setText(locationName);
             placeAddr.setText(bundle.getString("placeAddr"));
         }
 
@@ -96,45 +106,52 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         cardView = (CardView)findViewById(R.id.place_placeMapCard);
         cardView.addView(tMapView);
 
-        TMapPoint currentPlacePoint = new TMapPoint(37.570194, 126.983045);
         tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
-        tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
         tMapView.setMarkerRotate(true);
 
-        //TMap에 Marker 추가
         final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
-        TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
-        currentPlaceMarker.setIcon(bitmap);
-        currentPlaceMarker.setTMapPoint(currentPlacePoint);
-        tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
 
-        //Volley
+        //Volley 로 해당 장소 위치 받아와서 Marker 추가
+        DataFromServer dataFromServer = new DataFromServer();
+        Map<String, Object> data = dataFromServer.getDataFromLocationName(locationName);
+        String string = data.get("W3W").toString();
+        int end = string.length();
+        final String stringFinal = string.substring(1, end - 1);
+
         textView = (TextView) findViewById(R.id.place_description_text);
         requestQueue = Volley.newRequestQueue(this);
-        String url = "https://www.google.com";
+        String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ stringFinal +"&key=F4VVBXGP";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                textView.setText(response);
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject location = response.getJSONObject("coordinates");
+                    textView.setText("result = " + location + stringFinal);
+
+                    String latitude = location.getString("lat");
+                    String longitude = location.getString("lng");
+                    TMapPoint currentPlacePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                    tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
+
+                    TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
+                    currentPlaceMarker.setIcon(bitmap);
+                    currentPlaceMarker.setTMapPoint(currentPlacePoint);
+                    tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Fail to Get StringRequest", Toast.LENGTH_SHORT).show();
+                textView.setText("Fail to Get JSONRequest" + stringFinal);
             }
         });
 
-        stringRequest.setTag(TAG);
-        requestQueue.add(stringRequest);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(requestQueue != null) {
-            requestQueue.cancelAll(TAG);
-        }
+        jsonObjectRequest.setTag(TAG);
+        requestQueue.add(jsonObjectRequest);
     }
 
     //벡터이미지에서 비트맵 변환
