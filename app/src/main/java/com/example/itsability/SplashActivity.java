@@ -16,7 +16,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Map;
 
 //스플래쉬 구현은 https://yongtech.tistory.com/100, https://lx5475.github.io/2017/07/15/android-splash/ 여기를 참고했습니다.
-//로딩시간은 1초로 임의로 설정했습니다.
+//Splash에서 데이터를 받아온 후, MainActivity에서 레이아웃을 구성할 수 있도록 여유시간을 설정하였습니다.
 
 public class SplashActivity extends Activity {
 
