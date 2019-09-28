@@ -1,14 +1,11 @@
 package com.example.itsability;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,21 +20,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapOverlay;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.Map;
 
 
@@ -47,11 +40,13 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     private CardView cardView;
     private ImageView placeMainImageView;
 
-    private RequestQueue requestQueue;
+    private RequestQueue requestLocationQueue;
     private TextView textView;
 
     private String locationName;
     private static final String TAG = "DESCRIPTION";
+
+    private RequestQueue requestInfoQueue;
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
@@ -118,8 +113,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         int end = string.length();
         final String stringFinal = string.substring(1, end - 1);
 
-        textView = (TextView) findViewById(R.id.place_description_text);
-        requestQueue = Volley.newRequestQueue(this);
+        requestLocationQueue = Volley.newRequestQueue(this);
         String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ stringFinal +"&key=F4VVBXGP";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -127,7 +121,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject location = response.getJSONObject("coordinates");
-                    textView.setText("result = " + location + stringFinal);
 
                     String latitude = location.getString("lat");
                     String longitude = location.getString("lng");
@@ -146,19 +139,42 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                textView.setText("Fail to Get JSONRequest" + stringFinal);
+                Toast.makeText(getApplicationContext(), "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
             }
         });
 
         jsonObjectRequest.setTag(TAG);
-        requestQueue.add(jsonObjectRequest);
+        requestLocationQueue.add(jsonObjectRequest);
+
+        // Volley 로 해당 장소 정보 추가
+        textView = (TextView) findViewById(R.id.place_description_text);
+        requestInfoQueue = Volley.newRequestQueue(this);
+        String url2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D&contentTypeId=12&contentId=129507&MobileOS=AND&MobileApp=itsability&introYN=Y&_type=json";
+
+        JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject body = response.getJSONObject("body");
+                    textView.setText("result" + body);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Fail to Get Info JSONRequest", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (requestQueue != null) {
-            requestQueue.cancelAll(TAG);
+        if (requestLocationQueue != null) {
+            requestLocationQueue.cancelAll(TAG);
         }
     }
 
