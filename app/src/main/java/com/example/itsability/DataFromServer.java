@@ -9,7 +9,7 @@ public class DataFromServer {
 
     private static List<Map<String,Object>> placeData = new ArrayList<>();
     private static List<String> placeNameforSearchIndex = new ArrayList<>();
-    private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D"
+    private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
 
 
     public void addData(Map<String,Object> data) {
