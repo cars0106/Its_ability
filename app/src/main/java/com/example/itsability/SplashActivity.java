@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
 import java.util.Map;
 
 //스플래쉬 구현은 https://yongtech.tistory.com/100, https://lx5475.github.io/2017/07/15/android-splash/ 여기를 참고했습니다.
@@ -51,6 +52,9 @@ public class SplashActivity extends Activity {
                                             //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
                                             Map<String,Object> data = document.getData();
                                             dataGetInstance.addData(data);
+
+                                            List<String> w3wData = (List<String>)document.get("W3W");
+                                            dataGetInstance.addW3WValue(w3wData);
                                         }
                                     }
                                 }

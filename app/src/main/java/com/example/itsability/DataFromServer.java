@@ -12,7 +12,8 @@ public class DataFromServer {
 
     private static List<Map<String,Object>> placeData = new ArrayList<>();
     private static List<String> placeNameforSearchIndex = new ArrayList<>();
-    private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
+    private static List<List<String>> placeW3W = new ArrayList<>();
+        private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
 
 
     public void addData(Map<String,Object> data) {
@@ -56,6 +57,7 @@ public class DataFromServer {
     }
 
     public List<String> returnW3WAddr(String LocationName) {
+        /*
         Map<String,Object> locationData = getDataFromLocationName(LocationName);
 
         //Object를 String으로 바꾼 후, 이를 Substring, split으로 이용하여 배열의 형태로 변환
@@ -64,19 +66,23 @@ public class DataFromServer {
         List<String> list = Arrays.asList(origin.split(","));
 
         return list;
+
+         */
+
+        int index = placeNameforSearchIndex.indexOf(LocationName);
+        return placeW3W.get(index);
+
+    }
+
+    public void addW3WValue(List<String> value) {
+        placeW3W.add(value);
     }
 
     //Map Activity에 마커를 찍을때(모든 장소들의 W3W값을 가져와야 할 때) 사용합니다.
     public List<String> returnAllW3WAddr() {
 
         List<String> returnW3W = new ArrayList<>();
-
-        for(Map<String,Object> i : placeData) {
-            String w3w = i.get("W3W").toString();
-            w3w = w3w.substring(1,w3w.indexOf(",")-1);
-            returnW3W.add(w3w);
-        }
-
+        for(List<String> i : placeW3W) { returnW3W.add(i.get(0)); }
         return returnW3W;
     }
 }
