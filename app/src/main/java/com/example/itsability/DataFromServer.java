@@ -3,6 +3,7 @@ package com.example.itsability;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,12 +14,15 @@ public class DataFromServer {
     private static List<Map<String,Object>> placeData = new ArrayList<>();
     private static List<String> placeNameforSearchIndex = new ArrayList<>();
     private static List<List<String>> placeW3W = new ArrayList<>();
-        private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
+    private static List<Map<String,List<String>>> placeDescriptionData = new ArrayList<>();
+    private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
 
 
-    public void addData(Map<String,Object> data) {
+    public void addData(Map<String,Object> data, List<String> W3W, Map<String,List<String>> placeDescription) {
         placeData.add(data);
         placeNameforSearchIndex.add(data.get("Location").toString());
+        placeW3W.add(W3W);
+        placeDescriptionData.add(placeDescription);
     }
 
     public Map<String,Object> getDataFromLocationName(String name) {
@@ -85,4 +89,6 @@ public class DataFromServer {
         for(List<String> i : placeW3W) { returnW3W.add(i.get(0)); }
         return returnW3W;
     }
+
+
 }
