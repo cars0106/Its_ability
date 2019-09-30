@@ -169,6 +169,11 @@ public class DataFromServer {
         return placeCoordinateForPlaceDescription;
     }
 
+    public static List<Map<String,String>> getPhotoDescriptionData(String locationName) {
+        int index = placeName.indexOf(locationName);
+        return photoDescriptionData.get(index);
+    }
+
 
 
 

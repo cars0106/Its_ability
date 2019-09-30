@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/recyclerPhoto_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:text="TextView"
+        android:textAppearance="@style/Textstyle_recyclerPhotoTitle" />
+
+    <TextView
+        android:id="@+id/recyclerPhoto_cameraDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/recyclerPhoto_photo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:srcCompat="@color/itsability_pink" />
+
+    <TextView
+        android:id="@+id/recyclerPhoto_hashTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_demilight"
+        android:text="TextView"
+        android:textAppearance="@style/Textstyle_recyclerHashTag" />
+
+    <TextView
+        android:id="@+id/recyclerPhoto_paragraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_light"
+        android:text="TextView"
+        android:textAppearance="@style/Textstyle_recyclerParagraph" />
+
+</LinearLayout>

@@ -85,6 +85,32 @@
         <item name="android:alpha">0.68</item>
     </style>
 
+    <style name="Textstyle_recyclerPhotoTitle" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Textstyle_recyclerCameraData" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">7sp</item>
+        <item name="android:alpha">0.68</item>
+    </style>
+
+    <style name="Textstyle_recyclerHashTag" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_demilight</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Textstyle_recyclerParagraph" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_light</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:alpha">0.68</item>
+    </style>
+
     <!-- SplashActivity 구현 관련 -->
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">@drawable/splash</item>

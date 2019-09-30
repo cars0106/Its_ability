@@ -19,6 +19,7 @@
         <activity android:name=".MainSearchActivity"></activity>
         <activity android:name=".PlaceDescriptionActivity"></activity>
         <activity android:name=".PlaceSearchActivity"></activity>
+        <activity android:name=".PhotoDescriptionActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
