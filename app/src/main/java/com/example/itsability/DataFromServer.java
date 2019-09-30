@@ -66,6 +66,11 @@ public class DataFromServer {
         return placeData.get(index).get("Address").toString();
     }
 
+    public static String getAddress(String locationName) {
+        int index = placeName.indexOf(locationName);
+        return placeData.get(index).get("Address").toString();
+    }
+
     public static String getPlaceLocationDescription(int index) {
         return placeData.get(index).get("PlaceLocationDescription").toString();
     }
@@ -86,6 +91,11 @@ public class DataFromServer {
         }
 
         return url;
+    }
+
+    public static Map<String,List<String>> getPlaceDescriptionData(String locationName) {
+        int index = placeName.indexOf(locationName);
+        return placeDescriptionData.get(index);
     }
 
     //받아온 w3w값을 위,경도 값으로 변경한 후, placeW3WtoCoordinateForMapActivity에 추가합니다.

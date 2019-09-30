@@ -31,8 +31,10 @@ import com.skt.Tmap.TMapView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class PlaceDescriptionActivity extends AppCompatActivity {
@@ -72,9 +74,32 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         if(getIntent().hasExtra("placeName")) {
             TextView placeName = (TextView)findViewById(R.id.place_placeName);
             TextView placeAddr = (TextView)findViewById(R.id.place_placeAddress);
+
+            TextView recommandTime = (TextView)findViewById(R.id.place_recommandTime);
+            TextView recommandTimeDetail = (TextView)findViewById(R.id.place_recommandTimeDetail);
+            TextView notRecommandTime = (TextView)findViewById(R.id.place_notRecommandTime);
+            TextView notRecommandTimeDetail = (TextView)findViewById(R.id.place_notRecommandTimeDetail);
+            TextView recommandClothes = (TextView)findViewById(R.id.place_recommandClothes);
+            TextView recommandClothesDetail = (TextView)findViewById(R.id.place_recommandClothesDetail);
+            TextView otherTips = (TextView)findViewById(R.id.place_otherTips);
+            TextView otherTipsDetail = (TextView)findViewById(R.id.place_otherTipsDetail);
+
+
             locationName = bundle.getString("placeName");
+            Map<String, List<String>> descriptionData = DataFromServer.getPlaceDescriptionData(locationName);
+
+
             placeName.setText(locationName);
-            placeAddr.setText(bundle.getString("placeAddr"));
+            placeAddr.setText(DataFromServer.getAddress(locationName));
+
+            recommandTime.setText(descriptionData.get("PhotoTime").get(1));
+            recommandTimeDetail.setText(descriptionData.get("PhotoTime").get(2));
+            notRecommandTime.setText(descriptionData.get("NotRecommandTime").get(0));
+            notRecommandTimeDetail.setText(descriptionData.get("NotRecommandTime").get(1));
+            recommandClothes.setText(descriptionData.get("RecommandClothes").get(0));
+            recommandClothesDetail.setText(descriptionData.get("RecommandClothes").get(1));
+            otherTips.setText(descriptionData.get("OtherTips").get(0));
+            otherTipsDetail.setText(descriptionData.get("OtherTips").get(1));
         }
 
 
