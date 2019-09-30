@@ -1,11 +1,22 @@
 package com.example.itsability;
 
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.skt.Tmap.TMapPoint;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,39 +25,34 @@ public class DataFromServer {
     private static List<Map<String,Object>> placeData = new ArrayList<>();
     private static List<String> placeNameforSearchIndex = new ArrayList<>();
     private static List<List<String>> placeW3W = new ArrayList<>();
+    private static List<TMapPoint> placeW3WtoCoordinateForMapActivity = new ArrayList<>();
     private static List<Map<String,List<String>>> placeDescriptionData = new ArrayList<>();
+
     private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
+    private static final String TAG = "DESCRIPTION";
 
-
-    public void addData(Map<String,Object> data, List<String> W3W, Map<String,List<String>> placeDescription) {
+    public static void addData(Map<String,Object> data, List<String> w3w, Map<String,List<String>> placeDescription, final Context context) {
         placeData.add(data);
         placeNameforSearchIndex.add(data.get("Location").toString());
-        placeW3W.add(W3W);
+        placeW3W.add(w3w);
         placeDescriptionData.add(placeDescription);
+
+        addTMapPointForMapActivity(w3w.get(0),context);
     }
 
-    public Map<String,Object> getDataFromLocationName(String name) {
-        int index = placeNameforSearchIndex.indexOf(name);
-        return placeData.get(index);
-    }
-
-    public List<Map<String,Object>> returnData() {
-        return placeData;
-    }
-
-    public String returnLocationName(int index) {
+    public static String returnLocationName(int index) {
         return placeData.get(index).get("Location").toString();
     }
 
-    public String returnAddress(int index) {
+    public static String returnAddress(int index) {
         return placeData.get(index).get("Address").toString();
     }
 
-    public int returnDataSize() {
+    public static int returnDataSize() {
         return placeData.size();
     }
 
-    public String returnTourAPIUrl(String LocationName) {
+    public static String returnTourAPIUrl(String LocationName) {
         int index = placeNameforSearchIndex.indexOf(LocationName);
         String url = placeData.get(index).get("tourAPI").toString();
 
@@ -60,35 +66,53 @@ public class DataFromServer {
         return url;
     }
 
+    //한 장소에서 촬영된 여러개의 스팟의 마커를 PlaceDescription Activity에 추가할 때 사용합니다.
     public List<String> returnW3WAddr(String LocationName) {
-        /*
-        Map<String,Object> locationData = getDataFromLocationName(LocationName);
-
-        //Object를 String으로 바꾼 후, 이를 Substring, split으로 이용하여 배열의 형태로 변환
-        String origin = locationData.get("W3W").toString();
-        origin = origin.substring(1, origin.length() - 1);
-        List<String> list = Arrays.asList(origin.split(","));
-
-        return list;
-
-         */
-
         int index = placeNameforSearchIndex.indexOf(LocationName);
         return placeW3W.get(index);
-
     }
 
-    public void addW3WValue(List<String> value) {
-        placeW3W.add(value);
+    //받아온 w3w값을 위,경도 값으로 변경한 후, placeW3WtoCoordinateForMapActivity에 추가합니다.
+    public static void addTMapPointForMapActivity(String w3w, final Context context) {
+
+        Log.d("TAG","Adding Data");
+
+        RequestQueue requestLocationQueue = Volley.newRequestQueue(context);
+        String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ w3w +"&key=F4VVBXGP";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    //받아온lat, lng 값을 Double로 바꾼 후, TMapPoint의 형태로 저장
+                    JSONObject location = response.getJSONObject("coordinates");
+
+                    String latitude = location.getString("lat");
+                    String longitude = location.getString("lng");
+                    Log.d("TAG","Saving lat : "+latitude + " lng : "+longitude);
+                    TMapPoint placePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                    placeW3WtoCoordinateForMapActivity.add(placePoint);
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        jsonObjectRequest.setTag(TAG);
+        requestLocationQueue.add(jsonObjectRequest);
     }
 
-    //Map Activity에 마커를 찍을때(모든 장소들의 W3W값을 가져와야 할 때) 사용합니다.
-    public List<String> returnAllW3WAddr() {
-
-        List<String> returnW3W = new ArrayList<>();
-        for(List<String> i : placeW3W) { returnW3W.add(i.get(0)); }
-        return returnW3W;
+    public static List<TMapPoint> returnTMapPointForMapActivity() {
+        return placeW3WtoCoordinateForMapActivity;
     }
+
 
 
 }
