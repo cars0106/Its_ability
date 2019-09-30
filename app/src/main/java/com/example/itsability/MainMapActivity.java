@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ import java.util.List;
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View mapCard;
     TextView textView;
+    Button centerMapButton;
 
     private TMapView tMapView;
     private DataFromServer dataFromServer = new DataFromServer();
@@ -69,6 +71,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             mapCard = (View) findViewById(R.id.map_card);
             mapCard.setVisibility(View.INVISIBLE);
             textView = findViewById(R.id.place_cardPlaceName);
+            centerMapButton = findViewById(R.id.map_makeCenterLocationButton);
 
             //현재 위치 설정
             startLocationService();
@@ -112,6 +115,8 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                             .apply(new RequestOptions().transform(new CenterCrop()))
                             .into(cardImage);
 
+                    centerMapButton.setVisibility(View.VISIBLE);
+
                     return false;
                 }
 
@@ -119,6 +124,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
                     for (TMapMarkerItem item : arrayList) {
                         mapCard.setVisibility(View.VISIBLE);
+                        centerMapButton.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
                     }
                     Log.d("EndTest", " EndTest");
