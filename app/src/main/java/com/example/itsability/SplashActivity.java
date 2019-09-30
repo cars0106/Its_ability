@@ -67,7 +67,9 @@ public class SplashActivity extends Activity {
                                             Map<String, Object> data = document.getData();
                                             List<String> w3wData = (List<String>) document.get("W3W");
                                             Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
-                                            DataFromServer.addData(data, w3wData, placeDescriptionData, context);
+                                            List<Map<String,String>> photoDescriptionData = (List<Map<String,String>>) document.get("PhotoDescription");
+
+                                            DataFromServer.addData(data, w3wData, placeDescriptionData, photoDescriptionData, context);
                                         }
                                     }
                                 }

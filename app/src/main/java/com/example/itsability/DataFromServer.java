@@ -42,17 +42,22 @@ public class DataFromServer {
     private static Map<String,Integer> placeW3WNum = new HashMap<>();
 
     private static List<Map<String,List<String>>> placeDescriptionData = new ArrayList<>();
+    private static List<List<Map<String,String>>> photoDescriptionData = new ArrayList<>();
 
     private static final String tourAPIKey = "c5DXs4GAE2qWO%2BmeVvcCmSQIIXtCL9izfIzCA2%2BGJFkxuA4%2BapH9EXOR4fvRS0s3RrYuzL3ug8ducJchXZn9AQ%3D%3D";
     private static final String TAG = "DESCRIPTION";
 
-    public static void addData(Map<String,Object> data, List<String> w3w, Map<String,List<String>> placeDescription, final Context context) {
+    public static void addData(Map<String,Object> data, List<String> w3w, Map<String,List<String>> placeDescription, List<Map<String,String>> photoDescription, final Context context) {
 
         String locationName = data.get("Location").toString();
 
         placeData.add(data);
         placeName.add(locationName);
         placeDescriptionData.add(placeDescription);
+        photoDescriptionData.add(photoDescription);
+
+        try {Log.d("TAG",photoDescription.toString()); }
+        catch(Exception e) { Log.d("TAG","PhotoDescription is Null"); }
 
         placeW3WNum.put(locationName,0);
         for(String i : w3w) { addTMapPoint(locationName,i,context); }
