@@ -178,7 +178,10 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
         mapCard.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                TextView placeName = (TextView)findViewById(R.id.place_cardPlaceName);
+
                 Intent placeDescription = new Intent(getApplicationContext(),PlaceDescriptionActivity.class);
+                placeDescription.putExtra("placeName",placeName.getText().toString());
                 startActivity(placeDescription);
                 return true;
             }

@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent placeDescriptionIntent = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                         placeDescriptionIntent.putExtra("placeName",data.getLocationName());
-                        placeDescriptionIntent.putExtra("placeAddr",data.getLocationAddr());
                         startActivity(placeDescriptionIntent);
                     }
                 })

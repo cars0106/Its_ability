@@ -89,7 +89,6 @@ public class MainArActivity extends AppCompatActivity {
                         RecyclerData data = adapter.returnItem(position);
                         Intent placeDescriptionIntent = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                         placeDescriptionIntent.putExtra("placeName",data.getLocationName());
-                        placeDescriptionIntent.putExtra("placeAddr",data.getLocationAddr());
                         startActivity(placeDescriptionIntent);
                     }
                 })
@@ -108,35 +107,8 @@ public class MainArActivity extends AppCompatActivity {
     //Back-End 작업이 끝나면 서버에서 호출하여 가져온 값을 저장하도록 코드를 수정해야 합니다.
     private void addAdapterItem() {
 
-        List<String> testName = Arrays.asList(
-                "숭실대학교",
-                "청계천",
-                "반포한강공원",
-                "호텔캐슬",
-                "미디어스튜디오",
-                "남산타워",
-                "숭실대학교",
-                "청계천",
-                "반포한강공원",
-                "호텔캐슬",
-                "미디어스튜디오",
-                "남산타워"
-            );
-
-        List<String> testAddr = Arrays.asList(
-                "서울특별시 동작구 상도로 369",
-                "서울특별시 종로구 창신동",
-                "서울특별시 서초구 반포동",
-                "서울특별시 송파구 올림픽로 240",
-                "서울특별시 동작구 상도로 369",
-                "서울특별시 용산구 남산공원길 103",
-                "서울특별시 동작구 상도로 369",
-                "서울특별시 종로구 창신동",
-                "서울특별시 서초구 반포동",
-                "서울특별시 송파구 올림픽로 240",
-                "서울특별시 동작구 상도로 369",
-                "서울특별시 용산구 남산공원길 103"
-            );
+        //GetDataFromServer의 인스턴스를 생성한 후, returnData로 저장한 값들을 가져옵니다.
+        //List<Map<String,Object>> data = dataInstance.returnData();
 
         List<String> testImageUrl = Arrays.asList(
                 "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true",
@@ -152,17 +124,17 @@ public class MainArActivity extends AppCompatActivity {
                 "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_10.jpg?raw=true",
                 "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_11.jpg?raw=true",
                 "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_12.jpg?raw=true"
-            );
+        );
 
-        for(int i = 0; i<testName.size();i++) {
+
+        DataFromServer dataInstance = new DataFromServer();
+
+        for(int i = 0; i<dataInstance.getDataSize(); i++) {
             RecyclerData t = new RecyclerData();
-            t.setLocationName(testName.get(i));
-            t.setLocationAddr(testAddr.get(i));
+            t.setLocationName(dataInstance.getLocationName(i));
+            t.setLocationAddr(dataInstance.getAddress(i));
             t.setImageUrl(testImageUrl.get(i));
-
             adapter.addItem(t);
-
-
         }
     }
 
