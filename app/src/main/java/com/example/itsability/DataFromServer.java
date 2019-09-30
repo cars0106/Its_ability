@@ -66,6 +66,10 @@ public class DataFromServer {
         return placeData.get(index).get("Address").toString();
     }
 
+    public static String getPlaceLocationDescription(int index) {
+        return placeData.get(index).get("PlaceLocationDescription").toString();
+    }
+
     public static int getDataSize() {
         return placeData.size();
     }
@@ -128,7 +132,6 @@ public class DataFromServer {
         jsonObjectRequest.setTag(TAG);
         requestLocationQueue.add(jsonObjectRequest);
     }
-
 
     public static List<TMapPoint> getTMapPointForMapActivity() {
         List<TMapPoint> placeCoordinateForMapActivity = new ArrayList<>();

@@ -41,7 +41,6 @@ import java.util.List;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View mapCard;
-    TextView textView;
     Button centerMapButton;
 
     private TMapView tMapView;
@@ -70,7 +69,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             // Card 객체 생성 및 visibility 속성 변경
             mapCard = (View) findViewById(R.id.map_card);
             mapCard.setVisibility(View.INVISIBLE);
-            textView = findViewById(R.id.place_cardPlaceName);
             centerMapButton = findViewById(R.id.map_makeCenterLocationButton);
 
             //현재 위치 설정
@@ -121,13 +119,25 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 }
 
                 @Override
+                //마커를 클릭했을 경우
                 public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
                     for (TMapMarkerItem item : arrayList) {
+
+                        //mapCard를 VISIBLE로, 지도 중심 이동 버튼을 INVISIBLE로 변경한다.
                         mapCard.setVisibility(View.VISIBLE);
                         centerMapButton.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getApplicationContext(), String.valueOf(item.getTMapPoint()), Toast.LENGTH_LONG).show();
+
+                        //Marker의 Index를 이용하여 장소를 찾은 후, CardView에 해당 장소의 이름, 주소, 위치 설명 등을 보여준다.
+                        int markerIndex = Integer.parseInt(item.getID().replace("markerItem",""));
+
+                        TextView cardPlaceName = (TextView)findViewById(R.id.place_cardPlaceName);
+                        TextView cardPlaceAddr = (TextView)findViewById(R.id.place_cardPlaceAddress);
+                        TextView cardPlaceLocationDescription = (TextView)findViewById(R.id.place_cardPlaceDescription);
+
+                        cardPlaceName.setText(DataFromServer.getLocationName(markerIndex));
+                        cardPlaceAddr.setText(DataFromServer.getAddress(markerIndex));
+                        cardPlaceLocationDescription.setText(DataFromServer.getPlaceLocationDescription(markerIndex));
                     }
-                    Log.d("EndTest", " EndTest");
                     return false;
                 }
             });
