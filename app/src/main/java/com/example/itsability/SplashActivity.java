@@ -65,6 +65,10 @@ public class SplashActivity extends Activity {
 
                                             //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
                                             Map<String, Object> data = document.getData();
+                                            data.remove("PhotoDescription");
+                                            data.remove("PlaceDescription");
+                                            data.remove("W3W");
+                                            
                                             List<String> w3wData = (List<String>) document.get("W3W");
                                             Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
                                             List<Map<String,String>> photoDescriptionData = (List<Map<String,String>>) document.get("PhotoDescription");
