@@ -36,12 +36,16 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View mapCard;
     TextView textView;
 
     private TMapView tMapView;
+    private DataFromServer dataFromServer = new DataFromServer();
+    private static final String TAG = "DESCRIPTION";
+
 
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
@@ -61,8 +65,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
 
         try {
-
-
             // Card 객체 생성 및 visibility 속성 변경
             mapCard = (View) findViewById(R.id.map_card);
             mapCard.setVisibility(View.INVISIBLE);
@@ -84,18 +86,16 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             https://community.openapi.sk.com/t/marker/7010/4
             다중 마커 생성
             */
+
+            //마커아이콘 생성 후, Map Activity에 표시할 TMapPoint List를 가져옵니다.
             final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
+            List<TMapPoint> allTMapPoint = dataFromServer.returnTMapPointForMapActivity();
 
-            final ArrayList<TMapPoint> alTMapPoint = new ArrayList<>();
-            alTMapPoint.add(new TMapPoint(37.496263, 126.959167)); // 숭실대학교 창신관
-            alTMapPoint.add(new TMapPoint(37.576016, 126.976867)); // 광화문
-            alTMapPoint.add(new TMapPoint(37.570432, 126.992169)); // 종로3가
-            alTMapPoint.add(new TMapPoint(37.570194, 126.983045)); // 종로5가
-
-            for (int i = 0; i < alTMapPoint.size(); i++) {
+            //가져온 TMapPoint List를 이용하여 마커들을 생성해줍니다.
+            for (int i = 0; i < allTMapPoint.size(); i++) {
                 TMapMarkerItem markerItem1 = new TMapMarkerItem();
                 markerItem1.setIcon(bitmap);
-                markerItem1.setTMapPoint(alTMapPoint.get(i));
+                markerItem1.setTMapPoint(allTMapPoint.get(i));
                 tMapView.addMarkerItem("markerItem" + i, markerItem1);
             }
 
