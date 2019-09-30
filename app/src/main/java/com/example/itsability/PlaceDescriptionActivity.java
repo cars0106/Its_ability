@@ -107,55 +107,25 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         tMapView.setSKTMapApiKey("5594960f-bb8d-46ea-94db-e4a68576b536");
         tMapView.setMarkerRotate(true);
 
+        //마커아이콘 생성 후, Map Activity에 표시할 TMapPoint List를 가져옵니다.
         final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
+        List<TMapPoint> allTMapPoint = DataFromServer.returnTMapPointForPlaceDescriptionActivity(locationName);
 
-        //Volley 로 해당 장소 위치 받아와서 Marker 추가
-        DataFromServer dataFromServer = new DataFromServer();
-        List<String> w3wData = dataFromServer.returnW3WAddr(locationName);
+        Log.d("TAG","PlaceDescription TMapPoint : "+allTMapPoint.toString());
 
-        for (String i : w3wData) {
-
-            requestLocationQueue = Volley.newRequestQueue(this);
-            String url = "https://api.what3words.com/v3/convert-to-coordinates?words="+ i.trim() +"&key=F4VVBXGP";
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        JSONObject location = response.getJSONObject("coordinates");
-
-                        String latitude = location.getString("lat");
-                        String longitude = location.getString("lng");
-                        TMapPoint currentPlacePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                        tMapView.setCenterPoint(currentPlacePoint.getLongitude(),currentPlacePoint.getLatitude());
-
-                        TMapMarkerItem currentPlaceMarker = new TMapMarkerItem();
-                        currentPlaceMarker.setIcon(bitmap);
-                        currentPlaceMarker.setTMapPoint(currentPlacePoint);
-                        tMapView.addMarkerItem("currentMarker", currentPlaceMarker);
-
-                        Log.d("TAG","MARKER ADDED");
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
-                }
-            });
-
-            jsonObjectRequest.setTag(TAG);
-            requestLocationQueue.add(jsonObjectRequest);
-
+        //가져온 TMapPoint List를 이용하여 마커들을 생성해줍니다.
+        for (int i = 0; i < allTMapPoint.size(); i++) {
+            Log.d("TAG","Marker Add" + String.valueOf(i));
+            TMapMarkerItem markerItem1 = new TMapMarkerItem();
+            markerItem1.setIcon(bitmap);
+            markerItem1.setTMapPoint(allTMapPoint.get(i));
+            tMapView.addMarkerItem("markerItem" + i, markerItem1);
         }
 
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
         requestInfoQueue = Volley.newRequestQueue(this);
-        String url2 = dataFromServer.returnTourAPIUrl(locationName);
+        String url2 = DataFromServer.returnTourAPIUrl(locationName);
 
         JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
             @Override

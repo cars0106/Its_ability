@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         RecyclerData data = adapter.returnItem(position);
+
                         Intent placeDescriptionIntent = new Intent(getApplicationContext(), PlaceDescriptionActivity.class);
                         placeDescriptionIntent.putExtra("placeName",data.getLocationName());
                         placeDescriptionIntent.putExtra("placeAddr",data.getLocationAddr());
