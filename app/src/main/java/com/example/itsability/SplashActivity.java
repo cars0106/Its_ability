@@ -1,18 +1,31 @@
 package com.example.itsability;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.skt.Tmap.TMapPoint;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +34,14 @@ import java.util.Map;
 
 public class SplashActivity extends Activity {
 
+    private Context context;
+    private static final String TAG = "DESCRIPTION";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = this;
 
         try {
 
@@ -31,10 +49,6 @@ public class SplashActivity extends Activity {
             Thread dataReadThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-
-                    //서버에서 가져온 데이터를 저장할 DataFromServer Instance 생성
-                    final DataFromServer dataGetInstance = new DataFromServer();
-
                     //FirebaseFirestore Instance 생성
                     FirebaseFirestore FirebaseDB = FirebaseFirestore.getInstance();
 
@@ -46,14 +60,14 @@ public class SplashActivity extends Activity {
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                                     //성공적으로 Firestore에서 값을 불러왔을 경우, 작업을 수행합니다.
-                                    if(task.isSuccessful()) {
-                                        for(QueryDocumentSnapshot document : task.getResult()) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
 
                                             //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
-                                            Map<String,Object> data = document.getData();
-                                            List<String> w3wData = (List<String>)document.get("W3W");
-                                            Map<String,List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
-                                            dataGetInstance.addData(data, w3wData, placeDescriptionData);
+                                            Map<String, Object> data = document.getData();
+                                            List<String> w3wData = (List<String>) document.get("W3W");
+                                            Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
+                                            DataFromServer.addData(data, w3wData, placeDescriptionData, context);
                                         }
                                     }
                                 }
@@ -66,8 +80,6 @@ public class SplashActivity extends Activity {
 
             //MainActivity에서 RecyclerView를 만들때까지의 여유시간을 줍니다.
             Thread.sleep(3000);
-
-
             startActivity(new Intent(this,MainActivity.class));
             finish();
         }
