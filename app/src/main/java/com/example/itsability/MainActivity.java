@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -28,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         openRecyclerView();
-
 
         //BottomNavigation 구현
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
@@ -130,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
 
         DataFromServer dataInstance = new DataFromServer();
 
-        for(int i = 0; i<dataInstance.returnDataSize();i++) {
+        for(int i = 0; i<dataInstance.getDataSize(); i++) {
             RecyclerData t = new RecyclerData();
-            t.setLocationName(dataInstance.returnLocationName(i));
-            t.setLocationAddr(dataInstance.returnAddress(i));
+            t.setLocationName(dataInstance.getLocationName(i));
+            t.setLocationAddr(dataInstance.getAddress(i));
             t.setImageUrl(testImageUrl.get(i));
             adapter.addItem(t);
         }

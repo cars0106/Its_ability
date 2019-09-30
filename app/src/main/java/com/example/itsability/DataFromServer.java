@@ -24,7 +24,7 @@ import java.util.Map;
 public class DataFromServer {
 
     private static List<Map<String,Object>> placeData = new ArrayList<>();
-    private static List<String> placeNameforSearchIndex = new ArrayList<>();
+    private static List<String> placeName = new ArrayList<>();
 
     /*
     W3W값의 위/경도 변환과 관련된 Map입니다.
@@ -51,27 +51,27 @@ public class DataFromServer {
         String locationName = data.get("Location").toString();
 
         placeData.add(data);
-        placeNameforSearchIndex.add(locationName);
+        placeName.add(locationName);
         placeDescriptionData.add(placeDescription);
 
         placeW3WNum.put(locationName,0);
         for(String i : w3w) { addTMapPoint(locationName,i,context); }
     }
 
-    public static String returnLocationName(int index) {
+    public static String getLocationName(int index) {
         return placeData.get(index).get("Location").toString();
     }
 
-    public static String returnAddress(int index) {
+    public static String getAddress(int index) {
         return placeData.get(index).get("Address").toString();
     }
 
-    public static int returnDataSize() {
+    public static int getDataSize() {
         return placeData.size();
     }
 
-    public static String returnTourAPIUrl(String LocationName) {
-        int index = placeNameforSearchIndex.indexOf(LocationName);
+    public static String getTourAPIUrl(String LocationName) {
+        int index = placeName.indexOf(LocationName);
         String url = placeData.get(index).get("tourAPI").toString();
 
         if(url.isEmpty() == false) {
@@ -130,17 +130,17 @@ public class DataFromServer {
     }
 
 
-    public static List<TMapPoint> returnTMapPointForMapActivity() {
+    public static List<TMapPoint> getTMapPointForMapActivity() {
         List<TMapPoint> placeCoordinateForMapActivity = new ArrayList<>();
 
-        for(String i : placeNameforSearchIndex) {
+        for(String i : placeName) {
             placeCoordinateForMapActivity.add(placeW3WtoCoordinate.get(i+"0"));
         }
 
         return placeCoordinateForMapActivity;
     }
 
-    public static List<TMapPoint> returnTMapPointForPlaceDescriptionActivity(String locationName) {
+    public static List<TMapPoint> getTMapPointForPlaceDescriptionActivity(String locationName) {
 
         List<TMapPoint> placeCoordinateForPlaceDescription = new ArrayList<>();
 

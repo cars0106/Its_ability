@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -34,7 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 
 
 public class PlaceDescriptionActivity extends AppCompatActivity {
@@ -109,7 +107,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         //마커아이콘 생성 후, Map Activity에 표시할 TMapPoint List를 가져옵니다.
         final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
-        List<TMapPoint> allTMapPoint = DataFromServer.returnTMapPointForPlaceDescriptionActivity(locationName);
+        List<TMapPoint> allTMapPoint = DataFromServer.getTMapPointForPlaceDescriptionActivity(locationName);
 
         Log.d("TAG","PlaceDescription TMapPoint : "+allTMapPoint.toString());
 
@@ -125,7 +123,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
         requestInfoQueue = Volley.newRequestQueue(this);
-        String url2 = DataFromServer.returnTourAPIUrl(locationName);
+        String url2 = DataFromServer.getTourAPIUrl(locationName);
 
         JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
             @Override
