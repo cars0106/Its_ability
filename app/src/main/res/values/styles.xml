@@ -75,7 +75,7 @@
     <style name="Textstyle_placeDescriptionMainText" parent="@style/TextAppearance.MaterialComponents.Headline3">
         <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">23sp</item>
     </style>
 
     <style name="Textstyle_placeDescriptionSubText" parent="@style/TextAppearance.MaterialComponents.Headline3">

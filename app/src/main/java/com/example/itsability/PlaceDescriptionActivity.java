@@ -72,6 +72,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(getIntent().hasExtra("placeName")) {
+
+            //TextView 초기화
             TextView placeName = (TextView)findViewById(R.id.place_placeName);
             TextView placeAddr = (TextView)findViewById(R.id.place_placeAddress);
 
@@ -84,10 +86,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             TextView otherTips = (TextView)findViewById(R.id.place_otherTips);
             TextView otherTipsDetail = (TextView)findViewById(R.id.place_otherTipsDetail);
 
-
             locationName = bundle.getString("placeName");
             Map<String, List<String>> descriptionData = DataFromServer.getPlaceDescriptionData(locationName);
-
 
             placeName.setText(locationName);
             placeAddr.setText(DataFromServer.getAddress(locationName));
@@ -134,16 +134,16 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
         List<TMapPoint> allTMapPoint = DataFromServer.getTMapPointForPlaceDescriptionActivity(locationName);
 
-        Log.d("TAG","PlaceDescription TMapPoint : "+allTMapPoint.toString());
+        tMapView.setCenterPoint(allTMapPoint.get(0).getLongitude(), allTMapPoint.get(0).getLatitude());
 
         //가져온 TMapPoint List를 이용하여 마커들을 생성해줍니다.
         for (int i = 0; i < allTMapPoint.size(); i++) {
-            Log.d("TAG","Marker Add" + String.valueOf(i));
             TMapMarkerItem markerItem1 = new TMapMarkerItem();
             markerItem1.setIcon(bitmap);
             markerItem1.setTMapPoint(allTMapPoint.get(i));
             tMapView.addMarkerItem("markerItem" + i, markerItem1);
         }
+
 
         // Volley 로 해당 장소 정보 추가
         textView = (TextView) findViewById(R.id.place_description_text);
