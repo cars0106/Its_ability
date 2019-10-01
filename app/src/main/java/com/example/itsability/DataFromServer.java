@@ -59,6 +59,8 @@ public class DataFromServer {
         try {Log.d("TAG",photoDescription.toString()); }
         catch(Exception e) { Log.d("TAG","PhotoDescription is Null"); }
 
+        Log.d("TAG",locationName);
+
         placeW3WNum.put(locationName,0);
         for(String i : w3w) { addTMapPoint(locationName,i,context); }
     }
