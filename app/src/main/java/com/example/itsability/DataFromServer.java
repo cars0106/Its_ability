@@ -78,6 +78,10 @@ public class DataFromServer {
         return placeData.get(index).get("Address").toString();
     }
 
+    public static boolean getAR(int index) {
+        return (boolean)placeData.get(index).get("AR");
+    }
+
     public static String getPlaceLocationDescription(int index) {
         return placeData.get(index).get("PlaceLocationDescription").toString();
     }

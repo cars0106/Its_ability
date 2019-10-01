@@ -134,6 +134,7 @@ public class MainArActivity extends AppCompatActivity {
             t.setLocationName(dataInstance.getLocationName(i));
             t.setLocationAddr(dataInstance.getAddress(i));
             t.setImageUrl(testImageUrl.get(i));
+            t.setAR(DataFromServer.getAR(i));
             adapter.addItem(t);
         }
     }

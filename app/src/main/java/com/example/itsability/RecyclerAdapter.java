@@ -66,6 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private TextView textView_PlaceName;
         private TextView textView_PlaceAddr;
         private ImageView imageView_PlaceImage;
+        private ImageView imageView_ARSupport;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             textView_PlaceName = itemView.findViewById(R.id.recycler_placeName);
             textView_PlaceAddr = itemView.findViewById(R.id.recycler_placeAddress);
             imageView_PlaceImage = itemView.findViewById(R.id.recycler_image);
+            imageView_ARSupport = itemView.findViewById(R.id.recycler_arSupport);
         }
 
         //View에 값을 Bind(할당, 연결) 시키는 메서드입니다.
@@ -84,6 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         void onBind(RecyclerData data) {
             textView_PlaceName.setText(data.getLocationName());
             textView_PlaceAddr.setText(data.getLocationAddr());
+            if(!data.getARSupport()) {imageView_ARSupport.setVisibility(View.INVISIBLE);}
             Glide.with(imageView_PlaceImage)
                     .load(data.getImageUrl())
                     .thumbnail(0.3f)

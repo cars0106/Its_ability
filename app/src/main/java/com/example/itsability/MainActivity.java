@@ -122,13 +122,12 @@ public class MainActivity extends AppCompatActivity {
             );
 
 
-        DataFromServer dataInstance = new DataFromServer();
-
-        for(int i = 0; i<dataInstance.getDataSize(); i++) {
+        for(int i = 0; i<DataFromServer.getDataSize(); i++) {
             RecyclerData t = new RecyclerData();
-            t.setLocationName(dataInstance.getLocationName(i));
-            t.setLocationAddr(dataInstance.getAddress(i));
+            t.setLocationName(DataFromServer.getLocationName(i));
+            t.setLocationAddr(DataFromServer.getAddress(i));
             t.setImageUrl(testImageUrl.get(i));
+            t.setAR(DataFromServer.getAR(i));
             adapter.addItem(t);
         }
     }

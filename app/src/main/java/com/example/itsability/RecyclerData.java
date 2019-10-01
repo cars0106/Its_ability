@@ -5,10 +5,12 @@ public class RecyclerData {
     private String locationName;
     private String locationAddr;
     private String imageUrl;
+    private boolean ar;
 
     public String getLocationName() {return locationName;}
     public String getLocationAddr() {return locationAddr;}
     public String getImageUrl() {return imageUrl;}
+    public boolean getARSupport() {return ar;}
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
@@ -19,4 +21,6 @@ public class RecyclerData {
     }
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void setAR(boolean ar) {this.ar = ar;}
 }

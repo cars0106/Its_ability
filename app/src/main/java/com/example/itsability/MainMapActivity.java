@@ -133,10 +133,13 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                         TextView cardPlaceName = (TextView)findViewById(R.id.place_cardPlaceName);
                         TextView cardPlaceAddr = (TextView)findViewById(R.id.place_cardPlaceAddress);
                         TextView cardPlaceLocationDescription = (TextView)findViewById(R.id.place_cardPlaceDescription);
+                        ImageView arSupport = (ImageView)findViewById(R.id.map_arSupport);
 
                         cardPlaceName.setText(DataFromServer.getLocationName(markerIndex));
                         cardPlaceAddr.setText(DataFromServer.getAddress(markerIndex));
                         cardPlaceLocationDescription.setText(DataFromServer.getPlaceLocationDescription(markerIndex));
+                        if(!DataFromServer.getAR(markerIndex)) {arSupport.setVisibility(View.INVISIBLE);}
+                        else {arSupport.setVisibility(View.VISIBLE);}
                     }
                     return false;
                 }
