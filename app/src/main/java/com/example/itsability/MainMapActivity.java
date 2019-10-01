@@ -180,7 +180,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 TextView placeName = (TextView)findViewById(R.id.place_cardPlaceName);
 
-                Intent placeDescription = new Intent(getApplicationContext(),PlaceDescriptionActivity.class);
+                Intent placeDescription = new Intent(getApplicationContext(),PhotoDescriptionActivity.class);
                 placeDescription.putExtra("placeName",placeName.getText().toString());
                 startActivity(placeDescription);
                 return true;

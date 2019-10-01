@@ -91,8 +91,8 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
             RecyclerData_PhotoDescription t = new RecyclerData_PhotoDescription();
 
             t.setPhotoTitle(photoDescriptionList.get(i).get("Location"));
-            t.setCameraDate(photoDescriptionList.get(i).get("CaptureDate") + " | " + photoDescriptionList.get(i).get("CameraModel"));
-            t.setHashTag(photoDescriptionList.get(i).get("Keyword").trim().replace(","," #"));
+            t.setCameraDate(photoDescriptionList.get(i).get("CameraModel") + " | " + photoDescriptionList.get(i).get("CaptureDate"));
+            t.setHashTag("#" + photoDescriptionList.get(i).get("Keyword").trim().replace(", "," #"));
             t.setParagraph(photoDescriptionList.get(i).get("Paragraph"));
             t.setImageUrl(testImageUrl.get(i));
 

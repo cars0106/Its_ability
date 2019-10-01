@@ -17,20 +17,24 @@
         android:id="@+id/recyclerPhoto_cameraDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="TextView" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="-18dp"
+        android:layout_marginBottom="10dp"
+        android:alpha="0.68"
+        android:text="TextView"
+        android:textAppearance="@style/Textstyle_recyclerCameraDate" />
 
     <ImageView
         android:id="@+id/recyclerPhoto_photo"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         app:srcCompat="@color/itsability_pink" />
 
     <TextView
         android:id="@+id/recyclerPhoto_hashTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanscjkkr_demilight"
+        android:layout_marginTop="3dp"
         android:text="TextView"
         android:textAppearance="@style/Textstyle_recyclerHashTag" />
 
@@ -38,6 +42,7 @@
         android:id="@+id/recyclerPhoto_paragraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/notosanscjkkr_light"
         android:text="TextView"
         android:textAppearance="@style/Textstyle_recyclerParagraph" />
