@@ -269,12 +269,157 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/place_description_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/place_otherInformationLinear"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로딩중..."
-                android:textStyle="bold" />
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginBottom="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:text="장소 기타정보"
+                    android:textColor="@android:color/black"
+                    android:textSize="10sp" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="15dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="#B3000000" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/place_usefee"
+                        android:layout_width="37dp"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:text="입장료"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
+
+                    <TextView
+                        android:id="@+id/place_usefeeDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.68"
+                        android:text="TextView"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/place_usetime"
+                        android:layout_width="37dp"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:text="이용시간"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
+
+                    <TextView
+                        android:id="@+id/place_usetimeDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.68"
+                        android:text="TextView"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/place_restdate"
+                        android:layout_width="37dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.8"
+                        android:text="휴무일"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
+
+                    <TextView
+                        android:id="@+id/place_restdateDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.68"
+                        android:text="TextView"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/place_parking"
+                        android:layout_width="37dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.8"
+                        android:text="주차여부"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
+
+                    <TextView
+                        android:id="@+id/place_parkingDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.68"
+                        android:text="TextView"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/place_parkingfeeLinear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/place_parkingfee"
+                        android:layout_width="37dp"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:text="주차요금"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
+
+                    <TextView
+                        android:id="@+id/place_parkingfeeDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="0.68"
+                        android:text="TextView"
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

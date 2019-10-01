@@ -85,6 +85,20 @@
         <item name="android:alpha">0.68</item>
     </style>
 
+    <style name="Textstyle_placeDescriptionBottomText" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">7sp</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+    <style name="Textstyle_placeDescriptionBottomSubText" parent="@style/TextAppearance.MaterialComponents.Headline3">
+        <item name="android:fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">6sp</item>
+        <item name="android:alpha">0.68</item>
+    </style>
+
     <style name="Textstyle_recyclerPhotoTitle" parent="@style/TextAppearance.MaterialComponents.Headline3">
         <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
         <item name="android:textColor">@android:color/black</item>

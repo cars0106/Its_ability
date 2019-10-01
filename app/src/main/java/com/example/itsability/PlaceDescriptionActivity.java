@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -146,43 +147,65 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
 
         // Volley 로 해당 장소 정보 추가
-        textView = (TextView) findViewById(R.id.place_description_text);
         requestInfoQueue = Volley.newRequestQueue(this);
         String url2 = DataFromServer.getTourAPIUrl(locationName);
 
-        JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject res = response.getJSONObject("response");
-                    JSONObject body = res.getJSONObject("body");
-                    JSONObject items = body.getJSONObject("items");
-                    JSONObject item = items.getJSONObject("item");
-                    String usefee = item.getString("usefee");
-                    String usetimeculture = item.getString("usetimeculture");
-                    String infocenterculture = item.getString("infocenterculture");
-                    String restdateculture = item.getString("restdateculture");
-                    String parkingculture = item.getString("parkingculture");
-                    String parkingfee = item.getString("parkingfee");
+        if(url2.isEmpty()) {
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_otherInformationLinear);
+            linearLayout.setVisibility(View.INVISIBLE);
+        }
+        else {
+            JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONObject res = response.getJSONObject("response");
+                        JSONObject body = res.getJSONObject("body");
+                        JSONObject items = body.getJSONObject("items");
+                        JSONObject item = items.getJSONObject("item");
 
-                    String sum = "입장료 : " + usefee + "\n이용시간 : " + usetimeculture + "\n문의 및 안내 : " + infocenterculture +"\n쉬는날 : " + restdateculture + "\n주차 가능 여부 : " + parkingculture + "\n주차료 : " + parkingfee;
-                    sum = sum.replaceAll("<br \\/>", "");
-                    textView.setText(sum);
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setVisibility(View.INVISIBLE);
-            }
-        });
+                        String extendString = "";
 
-        jsonObjectRequestInfo.setTag(TAG);
-        requestInfoQueue.add(jsonObjectRequestInfo);
+                        TextView usefeeText = (TextView)findViewById(R.id.place_usefeeDetail);
+                        TextView usetimeText = (TextView)findViewById(R.id.place_usetimeDetail);
+                        TextView restdateText = (TextView)findViewById(R.id.place_restdateDetail);
+                        TextView parkingText = (TextView)findViewById(R.id.place_parkingDetail);
+                        TextView parkingfeeText = (TextView)findViewById(R.id.place_parkingfeeDetail);
+
+
+                        if(item.has("usetimeculture")) {extendString = "culture";}
+
+                        usetimeText.setText(item.getString("usetime" + extendString).replaceAll("<br \\/>", ""));
+                        restdateText.setText(item.getString("restdate" + extendString).replaceAll("<br \\/>", ""));
+                        parkingText.setText(item.getString("parking" + extendString).replaceAll("<br \\/>", ""));
+
+                        if(item.has("usefee")) { usefeeText.setText(item.getString("usefee").replaceAll("<br \\/>", ""));}
+                        else {usefeeText.setText("없음");}
+
+                        if(item.has("parkingfee")) {parkingfeeText.setText(item.getString("parkingfee").replaceAll("<br \\/>", ""));}
+                        else {
+                            LinearLayout parkingfeeLinear = (LinearLayout)findViewById(R.id.place_parkingfeeLinear);
+                            parkingfeeLinear.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    textView.setVisibility(View.INVISIBLE);
+                }
+            });
+
+            jsonObjectRequestInfo.setTag(TAG);
+            requestInfoQueue.add(jsonObjectRequestInfo);
+        }
     }
+
+
 
     @Override
     protected void onStop() {
