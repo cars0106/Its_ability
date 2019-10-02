@@ -40,7 +40,7 @@
     <style name="Textstyle_CardPlaceName" parent="@style/TextAppearance.MaterialComponents.Headline2">
         <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:alpha">0.87</item>
     </style>
 

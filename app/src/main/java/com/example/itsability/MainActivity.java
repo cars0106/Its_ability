@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -53,6 +54,18 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        BottomNavigationView bottomNavigation = (BottomNavigationView)MainActivity.this.findViewById(R.id.bottom_navigation);
+        int selectedItemId = bottomNavigation.getSelectedItemId();
+
+        Log.d("TAG","SelectedItemId : " + String.valueOf(selectedItemId));
+        Log.d("TAG","SelectedItemId : " + String.valueOf(R.id.action_home));
+
+        if(R.id.action_home != selectedItemId) { bottomNavigation.setSelectedItemId(R.id.action_home); }
+        else {super.onBackPressed();}
     }
 
     //RecyclerView 구현과 관련된 메소드

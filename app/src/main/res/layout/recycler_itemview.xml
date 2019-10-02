@@ -33,6 +33,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-3dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -44,22 +45,24 @@
                     android:alpha="0.87"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:text="PlaceName"
-                    android:textAppearance="@style/Textstyle_CardPlaceName" />
+                    android:textAppearance="@style/Textstyle_CardPlaceName"
+                    android:letterSpacing="-0.03"
+                    />
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop = "3dp"
                     android:layout_marginStart="3dp"
-                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/img_pin"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_gravity="center"
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:layout_gravity="top"
                         android:alpha="0.6"
                         app:srcCompat="@drawable/ic_locationpin_24dp" />
 
@@ -67,12 +70,16 @@
                         android:id="@+id/recycler_placeAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart = "-1dp"
                         android:alpha="0.6"
                         android:text="PlaceAddress"
-                        android:textAppearance="@style/Textstyle_CardPlaceAddress" />
+                        android:textAppearance="@style/Textstyle_CardPlaceAddress"
+                        android:letterSpacing = "-0.01"
+                        android:lineHeight="7.5sp"/>
 
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 

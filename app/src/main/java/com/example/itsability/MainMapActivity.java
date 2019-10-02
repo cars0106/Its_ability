@@ -19,7 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,10 +41,9 @@ import java.util.List;
 
 public class MainMapActivity extends AppCompatActivity implements AutoPermissionsListener {
     View mapCard;
-    Button centerMapButton;
+    ImageButton centerMapButton;
 
     private TMapView tMapView;
-    private DataFromServer dataFromServer = new DataFromServer();
     private static final String TAG = "DESCRIPTION";
 
 
@@ -90,7 +89,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
 
             //마커아이콘 생성 후, Map Activity에 표시할 TMapPoint List를 가져옵니다.
             final Bitmap bitmap = getBitmapFromVectorDrawable(getApplicationContext(), R.drawable.ic_map_pin); // 마커 아이콘
-            List<TMapPoint> allTMapPoint = dataFromServer.getTMapPointForMapActivity();
+            List<TMapPoint> allTMapPoint = DataFromServer.getTMapPointForMapActivity();
 
             //가져온 TMapPoint List를 이용하여 마커들을 생성해줍니다.
             for (int i = 0; i < allTMapPoint.size(); i++) {
@@ -188,6 +187,13 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 placeDescription.putExtra("placeName",placeName.getText().toString());
                 startActivity(placeDescription);
                 return true;
+            }
+        });
+
+        centerMapButton.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startLocationService();
             }
         });
     }
