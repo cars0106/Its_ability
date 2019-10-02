@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <!--
+    https://stackoverflow.com/questions/8077728/how-to-prevent-the-activity-from-loading-twice-on-pressing-the-button
+    Activity가 두개 생기는 현상은 위의 링크를 참고하였습니다.
+    Activity에 android:launchMode="singleTask"를 추가합니다.
+    -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,12 +20,12 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMapActivity"></activity>
-        <activity android:name=".MainArActivity"></activity>
-        <activity android:name=".MainSearchActivity"></activity>
-        <activity android:name=".PlaceDescriptionActivity"></activity>
-        <activity android:name=".PlaceSearchActivity"></activity>
-        <activity android:name=".PhotoDescriptionActivity"></activity>
+        <activity android:name=".MainMapActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".MainArActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".MainSearchActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".PlaceDescriptionActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".PlaceSearchActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".PhotoDescriptionActivity" android:launchMode="singleTask"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -30,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
