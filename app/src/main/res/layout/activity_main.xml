@@ -35,19 +35,6 @@
             android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/main_placeNumZero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
-                android:alpha="0.64"
-                android:fontFamily="@font/notosanscjkkr_medium"
-                android:text="현재 위치에\n인생샷 가이드를 준비하고 있습니다"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                android:visibility="gone" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -87,6 +74,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/place_PlaceMainImage" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/main_placeNumZero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:alpha="0.64"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:text="현재 위치에\n인생샷 가이드를 준비하고 있습니다"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_recyclerview"

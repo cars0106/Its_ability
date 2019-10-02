@@ -44,7 +44,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     private TMapView tMapView;
     private CardView cardView;
-    private ImageView placeMainImageView;
 
     private RequestQueue requestLocationQueue;
     private TextView textView;
@@ -91,6 +90,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
             locationName = bundle.getString("placeName");
             Map<String, List<String>> descriptionData = DataFromServer.getPlaceDescriptionData(locationName);
+            String url = DataFromServer.getImageUrl(locationName);
 
             placeName.setText(locationName);
             placeAddr.setText(DataFromServer.getAddress(locationName));
@@ -103,18 +103,16 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             recommandClothesDetail.setText(descriptionData.get("RecommandClothes").get(1));
             otherTips.setText(descriptionData.get("OtherTips").get(0));
             otherTipsDetail.setText(descriptionData.get("OtherTips").get(1));
+
+            //PlaceMainImage 설정
+            ImageView placeMainImageView = (ImageView)findViewById(R.id.place_PlaceMainImage);
+            Glide.with(placeMainImageView)
+                    .load(url)
+                    .thumbnail(0.3f)
+                    .apply(new RequestOptions().transform(new CenterCrop()))
+                    .into(placeMainImageView);
+
         }
-
-
-
-        //PlaceMainImage 설정
-        placeMainImageView = (ImageView)findViewById(R.id.place_PlaceMainImage);
-        Glide.with(placeMainImageView)
-                .load("https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true")
-                .thumbnail(0.3f)
-                .apply(new RequestOptions().transform(new CenterCrop()))
-                .into(placeMainImageView);
-
 
 
         // TMap 생성 후 CardView에 추가
@@ -154,7 +152,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
         if(url2.isEmpty()) {
             LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_otherInformationLinear);
-            linearLayout.setVisibility(View.INVISIBLE);
+            linearLayout.setVisibility(View.GONE);
         }
         else {
             JsonObjectRequest jsonObjectRequestInfo = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {

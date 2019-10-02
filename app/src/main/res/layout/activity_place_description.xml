@@ -438,9 +438,11 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginBottom="30dp"
-                android:background="@android:color/white"
-                android:elevation="10dp"
+                android:background="@color/itsability_pink"
+                android:elevation="2dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
                 android:text="사진설명보기"
+                android:textColor="@android:color/white"
                 android:textSize="10dp" />
 
         </LinearLayout>

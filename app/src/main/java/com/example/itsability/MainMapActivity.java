@@ -105,13 +105,6 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                 public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
 
                     mapCard.setVisibility(View.INVISIBLE);
-                    ImageView cardImage = (ImageView)findViewById(R.id.map_cardImage);
-                    Glide.with(cardImage)
-                            .load("https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true")
-                            .thumbnail(0.3f)
-                            .apply(new RequestOptions().transform(new CenterCrop()))
-                            .into(cardImage);
-
                     centerMapButton.setVisibility(View.VISIBLE);
 
                     return false;
@@ -129,6 +122,7 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                         //Marker의 Index를 이용하여 장소를 찾은 후, CardView에 해당 장소의 이름, 주소, 위치 설명 등을 보여준다.
                         int markerIndex = Integer.parseInt(item.getID().replace("markerItem",""));
 
+                        ImageView cardImage = (ImageView)findViewById(R.id.map_cardImage);
                         TextView cardPlaceName = (TextView)findViewById(R.id.place_cardPlaceName);
                         TextView cardPlaceAddr = (TextView)findViewById(R.id.place_cardPlaceAddress);
                         TextView cardPlaceLocationDescription = (TextView)findViewById(R.id.place_cardPlaceDescription);
@@ -139,6 +133,12 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
                         cardPlaceLocationDescription.setText(DataFromServer.getPlaceLocationDescription(markerIndex));
                         if(!DataFromServer.getAR(markerIndex)) {arSupport.setVisibility(View.INVISIBLE);}
                         else {arSupport.setVisibility(View.VISIBLE);}
+
+                        Glide.with(cardImage)
+                                .load(DataFromServer.getImageUrl(markerIndex))
+                                .thumbnail(0.3f)
+                                .apply(new RequestOptions().transform(new CenterCrop()))
+                                .into(cardImage);
                     }
                     return false;
                 }
@@ -269,9 +269,5 @@ public class MainMapActivity extends AppCompatActivity implements AutoPermission
     @Override
     public void onGranted(int requestCode, String[] permissions) {
         Toast.makeText(this, "permissions granted : " + permissions.length, Toast.LENGTH_LONG).show();
-    }
-
-    public void onButtonClicked(View view) {
-        startLocationService();
     }
 }

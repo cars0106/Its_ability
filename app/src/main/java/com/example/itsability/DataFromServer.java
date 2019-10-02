@@ -90,6 +90,15 @@ public class DataFromServer {
         return placeData.size();
     }
 
+    public static String getImageUrl(int index) {
+        return placeData.get(index).get("url").toString();
+    }
+
+    public static String getImageUrl(String locationName) {
+        int index = placeName.indexOf(locationName);
+        return placeData.get(index).get("url").toString();
+    }
+
     public static String getTourAPIUrl(String LocationName) {
         int index = placeName.indexOf(LocationName);
         String url = placeData.get(index).get("tourAPI").toString();

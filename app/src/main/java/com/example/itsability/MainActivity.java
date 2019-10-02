@@ -115,31 +115,11 @@ public class MainActivity extends AppCompatActivity {
     //Back-End 작업이 끝나면 서버에서 호출하여 가져온 값을 저장하도록 코드를 수정해야 합니다.
     private void addAdapterItem() {
 
-        //GetDataFromServer의 인스턴스를 생성한 후, returnData로 저장한 값들을 가져옵니다.
-        //List<Map<String,Object>> data = dataInstance.returnData();
-
-        List<String> testImageUrl = Arrays.asList(
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_01.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_02.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_03.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_04.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_05.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_06.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_07.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_08.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_09.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_10.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_11.jpg?raw=true",
-                "https://github.com/SebinLee/itsability_photo/blob/master/KakaoTalk_20190912_143049359_12.jpg?raw=true"
-            );
-
-
         for(int i = 0; i<DataFromServer.getDataSize(); i++) {
             RecyclerData t = new RecyclerData();
             t.setLocationName(DataFromServer.getLocationName(i));
             t.setLocationAddr(DataFromServer.getAddress(i));
-            t.setImageUrl(testImageUrl.get(i));
+            t.setImageUrl(DataFromServer.getImageUrl(i));
             t.setAR(DataFromServer.getAR(i));
             adapter.addItem(t);
         }
