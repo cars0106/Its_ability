@@ -121,6 +121,5 @@ public class MainSearchActivity extends AppCompatActivity {
         for(TextView i : textViewPlaceName) {
             i.setOnTouchListener(onTouchListener);
         }
-
     }
 }

@@ -68,7 +68,7 @@ public class SplashActivity extends Activity {
                                             data.remove("PhotoDescription");
                                             data.remove("PlaceDescription");
                                             data.remove("W3W");
-                                            
+
                                             List<String> w3wData = (List<String>) document.get("W3W");
                                             Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
                                             List<Map<String,String>> photoDescriptionData = (List<Map<String,String>>) document.get("PhotoDescription");

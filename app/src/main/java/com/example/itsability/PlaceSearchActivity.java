@@ -22,6 +22,7 @@ public class PlaceSearchActivity extends AppCompatActivity {
     //RecyclerView 구현을 위한 Adapter
     private RecyclerAdapter adapter;
     private TextView topText;
+    private String locationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,11 @@ public class PlaceSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //이전 Activity에서 putExtra로 넘긴값 받아오기
-        Bundle p = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
+        locationName = getString(getResources().getIdentifier(bundle.getString("location"),"string",getPackageName()));
         topText = (TextView)findViewById(R.id.main_toptext);
         topText.setTextSize(25);
-        topText.setText("서울시 " + getString(getResources().getIdentifier(p.getString("location"),"string",getPackageName()))+"에서\n인생샷 스팟을 찾아보세요");
+        topText.setText("서울시 " + locationName +"에서\n인생샷 스팟을 찾아보세요");
         openRecyclerView();
 
         //BottomNavigation 구현
@@ -99,7 +101,12 @@ public class PlaceSearchActivity extends AppCompatActivity {
 
         adapter = new RecyclerAdapter();
         addAdapterItem();
-        recyclerView.setAdapter(adapter);
+        if(adapter.getItemCount() > 0) { recyclerView.setAdapter(adapter); }
+        else {
+            TextView textView = (TextView)findViewById(R.id.main_placeNumZero);
+            textView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     //RecyclerView에서 사용할 데이터를 불러오는 함수입니다.
@@ -126,15 +133,15 @@ public class PlaceSearchActivity extends AppCompatActivity {
         );
 
 
-        DataFromServer dataInstance = new DataFromServer();
-
-        for(int i = 0; i<dataInstance.getDataSize(); i++) {
-            RecyclerData t = new RecyclerData();
-            t.setLocationName(dataInstance.getLocationName(i));
-            t.setLocationAddr(dataInstance.getAddress(i));
-            t.setImageUrl(testImageUrl.get(i));
-            t.setAR(DataFromServer.getAR(i));
-            adapter.addItem(t);
+        for(int i = 0; i<DataFromServer.getDataSize(); i++) {
+            if(DataFromServer.getAddress(i).contains(locationName)) {
+                RecyclerData t = new RecyclerData();
+                t.setLocationName(DataFromServer.getLocationName(i));
+                t.setLocationAddr(DataFromServer.getAddress(i));
+                t.setImageUrl(testImageUrl.get(i));
+                t.setAR(DataFromServer.getAR(i));
+                adapter.addItem(t);
+            }
         }
     }
 }

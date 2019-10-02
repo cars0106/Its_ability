@@ -130,12 +130,14 @@ public class MainArActivity extends AppCompatActivity {
         DataFromServer dataInstance = new DataFromServer();
 
         for(int i = 0; i<dataInstance.getDataSize(); i++) {
-            RecyclerData t = new RecyclerData();
-            t.setLocationName(dataInstance.getLocationName(i));
-            t.setLocationAddr(dataInstance.getAddress(i));
-            t.setImageUrl(testImageUrl.get(i));
-            t.setAR(DataFromServer.getAR(i));
-            adapter.addItem(t);
+            if(DataFromServer.getAR(i)) {
+                RecyclerData t = new RecyclerData();
+                t.setLocationName(dataInstance.getLocationName(i));
+                t.setLocationAddr(dataInstance.getAddress(i));
+                t.setImageUrl(testImageUrl.get(i));
+                t.setAR(true);
+                adapter.addItem(t);
+            }
         }
     }
 
