@@ -88,6 +88,9 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             TextView otherTips = (TextView)findViewById(R.id.place_otherTips);
             TextView otherTipsDetail = (TextView)findViewById(R.id.place_otherTipsDetail);
 
+            ImageView placeMainImageView = (ImageView)findViewById(R.id.place_PlaceMainImage);
+            ImageView placeTimeImageView = (ImageView)findViewById(R.id.place_icRecommandTime);
+
             locationName = bundle.getString("placeName");
             Map<String, List<String>> descriptionData = DataFromServer.getPlaceDescriptionData(locationName);
             String url = DataFromServer.getImageUrl(locationName);
@@ -105,7 +108,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
             otherTipsDetail.setText(descriptionData.get("OtherTips").get(1));
 
             //PlaceMainImage 설정
-            ImageView placeMainImageView = (ImageView)findViewById(R.id.place_PlaceMainImage);
             Glide.with(placeMainImageView)
                     .load(url)
                     .thumbnail(0.3f)

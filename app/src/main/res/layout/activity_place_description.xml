@@ -52,8 +52,8 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
                         android:layout_marginBottom="8dp"
                         android:alpha="0.68"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +86,7 @@
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:text="서울특별시 종로구 창신동"
                         android:textColor="@android:color/black"
-                        android:textSize="7sp"
+                        android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -115,13 +115,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="17dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/place_icRecommandTime"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
                         app:srcCompat="@drawable/ic_time_daytime_48px" />
 
                     <LinearLayout
@@ -154,13 +154,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content "
                     android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="17dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/place_icNotRecommandTime"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
                         app:srcCompat="@drawable/ic_calendar_notsuggest" />
 
                     <LinearLayout
@@ -192,13 +192,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="17dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/place_icNotRecommandTime3"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
                         app:srcCompat="@drawable/ic_clothes_48px" />
 
                     <LinearLayout
@@ -230,13 +230,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="17dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/place_icOtherTips"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
                         app:srcCompat="@drawable/ic_photo_tip" />
 
                     <LinearLayout
@@ -287,13 +287,12 @@
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:text="장소 기타정보"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="25dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="#B3000000" />
 
@@ -305,12 +304,11 @@
 
                     <TextView
                         android:id="@+id/place_usefee"
-                        android:layout_width="45dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
                         android:text="입장료"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText"
-                        android:textSize="10sp" />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
 
                     <TextView
                         android:id="@+id/place_usefeeDetail"
@@ -318,9 +316,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.68"
-                        android:text="TextView"
+                        android:text="정보를 가져오고 있습니다."
                         android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        android:textSize="9sp" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -331,12 +329,11 @@
 
                     <TextView
                         android:id="@+id/place_usetime"
-                        android:layout_width="45dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
                         android:text="이용시간"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText"
-                        android:textSize="10sp" />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
 
                     <TextView
                         android:id="@+id/place_usetimeDetail"
@@ -344,9 +341,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.68"
-                        android:text="TextView"
+                        android:text="정보를 가져오고 있습니다."
                         android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        android:textSize="9sp" />
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -357,13 +354,12 @@
 
                     <TextView
                         android:id="@+id/place_restdate"
-                        android:layout_width="45dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.8"
                         android:text="휴무일"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText"
-                        android:textSize="10sp" />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
 
                     <TextView
                         android:id="@+id/place_restdateDetail"
@@ -371,9 +367,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.68"
-                        android:text="TextView"
+                        android:text="정보를 가져오고 있습니다."
                         android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        android:textSize="9sp" />
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -384,13 +380,12 @@
 
                     <TextView
                         android:id="@+id/place_parking"
-                        android:layout_width="45dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.8"
                         android:text="주차여부"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText"
-                        android:textSize="10sp" />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
 
                     <TextView
                         android:id="@+id/place_parkingDetail"
@@ -398,9 +393,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.68"
-                        android:text="TextView"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        android:textSize="9sp" />
+                        android:text="정보를 가져오고 있습니다."
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -411,12 +405,11 @@
 
                     <TextView
                         android:id="@+id/place_parkingfee"
-                        android:layout_width="45dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
                         android:text="주차요금"
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText"
-                        android:textSize="10sp" />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomText" />
 
                     <TextView
                         android:id="@+id/place_parkingfeeDetail"
@@ -424,9 +417,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="0.68"
-                        android:text="TextView"
+                        android:text="정보를 가져오고 있습니다."
                         android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        android:textSize="9sp" />
+                        />
                 </LinearLayout>
 
             </LinearLayout>
