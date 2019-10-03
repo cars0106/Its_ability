@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         openRecyclerView();
 
         //BottomNavigation 구현
-        final BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -40,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.action_ar:
                         Intent arIntent = new Intent(getApplicationContext(),MainArActivity.class);
-                        startActivity(arIntent);
+                        startActivityForResult(arIntent,100);
                         return true;
                     case R.id.action_search:
                         Intent searchIntent = new Intent(getApplicationContext(),MainSearchActivity.class);
-                        startActivity(searchIntent);
+                        startActivityForResult(searchIntent,100);
                         return true;
                     case R.id.action_map:
                         Intent mapIntent = new Intent(getApplicationContext(), MainMapActivity.class);
-                        startActivity(mapIntent);
+                        startActivityForResult(mapIntent,100);
                         return true;
                 }
                 return false;
@@ -56,16 +57,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //resultCode가 RESULT_OK일 경우, 하단바 선택을 원래대로 바꾸는 코드입니다.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == RESULT_OK) {
+            BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        }
+    }
+
+    //BackButton을 눌렀을 때, resultCode로 RESULT_OK를 반환하고 자신은 종료됩니다.
     @Override
     public void onBackPressed() {
-        BottomNavigationView bottomNavigation = (BottomNavigationView)MainActivity.this.findViewById(R.id.bottom_navigation);
-        int selectedItemId = bottomNavigation.getSelectedItemId();
-
-        Log.d("TAG","SelectedItemId : " + String.valueOf(selectedItemId));
-        Log.d("TAG","SelectedItemId : " + String.valueOf(R.id.action_home));
-
-        if(R.id.action_home != selectedItemId) { bottomNavigation.setSelectedItemId(R.id.action_home); }
-        else {super.onBackPressed();}
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
     //RecyclerView 구현과 관련된 메소드

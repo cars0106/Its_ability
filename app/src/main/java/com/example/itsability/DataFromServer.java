@@ -56,9 +56,6 @@ public class DataFromServer {
         placeDescriptionData.add(placeDescription);
         photoDescriptionData.add(photoDescription);
 
-        try {Log.d("TAG",photoDescription.toString()); }
-        catch(Exception e) { Log.d("TAG","PhotoDescription is Null"); }
-
         Log.d("TAG",locationName);
 
         placeW3WNum.put(locationName,0);
@@ -136,7 +133,6 @@ public class DataFromServer {
 
                     String latitude = location.getString("lat");
                     String longitude = location.getString("lng");
-                    Log.d("TAG","Saving lat : "+latitude + " lng : "+longitude);
                     TMapPoint placePoint = new TMapPoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
                     //아래의 코드를 통해 {63빌딩0 : TMapPoint1} 과 같은 형태로 좌표를 저장합니다.
@@ -155,7 +151,7 @@ public class DataFromServer {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Fail to Get Location JSONRequest", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "인터넷 연결 상태가 좋지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -188,8 +184,4 @@ public class DataFromServer {
         int index = placeName.indexOf(locationName);
         return photoDescriptionData.get(index);
     }
-
-
-
-
 }

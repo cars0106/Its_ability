@@ -41,22 +41,40 @@ public class MainArActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(mainIntent);
+                        startActivityForResult(mainIntent,100);
                         return true;
                     case R.id.action_ar:
                         return true;
                     case R.id.action_search:
                         Intent searchIntent = new Intent(getApplicationContext(),MainSearchActivity.class);
-                        startActivity(searchIntent);
+                        startActivityForResult(searchIntent,100);
                         return true;
                     case R.id.action_map:
                         Intent mapIntent = new Intent(getApplicationContext(), MainMapActivity.class);
-                        startActivity(mapIntent);
+                        startActivityForResult(mapIntent,100);
                         return true;
                 }
                 return false;
             }
         });
+    }
+
+    //resultCode가 RESULT_OK일 경우, 하단바 선택을 원래대로 바꾸는 코드입니다.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == RESULT_OK) {
+            BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+            bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        }
+    }
+
+    //BackButton을 눌렀을 때, resultCode로 RESULT_OK를 반환하고 자신은 종료됩니다.
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
     //RecyclerView 구현과 관련된 메소드
