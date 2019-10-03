@@ -233,8 +233,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -258,5 +256,10 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    public void onButtonShowARClicked(View view) {
+        Intent intent = new Intent(getApplicationContext(), HelloArActivity.class);
+        startActivity(intent);
     }
 }
