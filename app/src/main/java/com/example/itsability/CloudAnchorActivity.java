@@ -313,13 +313,15 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
             planeRenderer.createOnGlThread(this, "models/trigrid.png");
             pointCloudRenderer.createOnGlThread(this);
 
-            virtualObject.createOnGlThread(this, "models/andy.obj", "models/andy.png");
+            virtualObject.createOnGlThread(this, "models/humanresize.obj", "models/humanresize.png");
             virtualObject.setMaterialProperties(0.0f, 2.0f, 0.5f, 6.0f);
 
+            /*
             virtualObjectShadow.createOnGlThread(
                     this, "models/andy_shadow.obj", "models/andy_shadow.png");
             virtualObjectShadow.setBlendMode(ObjectRenderer.BlendMode.Shadow);
             virtualObjectShadow.setMaterialProperties(1.0f, 0.0f, 0.0f, 1.0f);
+             */
         } catch (IOException ex) {
             Log.e(TAG, "Failed to read an asset file", ex);
         }

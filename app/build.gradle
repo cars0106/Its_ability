@@ -69,3 +69,10 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+
+sceneform.asset('src/main/assets/models/humanresize.obj',
+        'default',
+        'src/main/assets/models/humanresize.sfa',
+        'src/main/assets/humanresize')
