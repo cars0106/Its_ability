@@ -259,7 +259,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     }
 
     public void onButtonShowARClicked(View view) {
-        Intent intent = new Intent(getApplicationContext(), HelloArActivity.class);
+        Intent intent = new Intent(getApplicationContext(),CloudAnchorActivity.class);
         startActivity(intent);
     }
 }
