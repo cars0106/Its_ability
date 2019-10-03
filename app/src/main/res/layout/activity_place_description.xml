@@ -135,7 +135,7 @@
                             android:id="@+id/place_recommandTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="-5dp"
                             android:fontFamily="@font/notosanscjkkr_bold"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionMainText" />
@@ -144,7 +144,7 @@
                             android:id="@+id/place_recommandTimeDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-18dp"
+                            android:layout_marginTop="-20dp"
                             android:alpha="0.68"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionSubText" />
@@ -173,7 +173,7 @@
                             android:id="@+id/place_notRecommandTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="-5dp"
                             android:fontFamily="@font/notosanscjkkr_bold"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionMainText" />
@@ -182,7 +182,7 @@
                             android:id="@+id/place_notRecommandTimeDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-17dp"
+                            android:layout_marginTop="-20dp"
                             android:alpha="0.68"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionSubText" />
@@ -211,7 +211,7 @@
                             android:id="@+id/place_recommandClothes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="-5dp"
                             android:fontFamily="@font/notosanscjkkr_bold"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionMainText" />
@@ -220,7 +220,7 @@
                             android:id="@+id/place_recommandClothesDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-17dp"
+                            android:layout_marginTop="-20dp"
                             android:alpha="0.68"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionSubText" />
@@ -249,7 +249,7 @@
                             android:id="@+id/place_otherTips"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="-5dp"
                             android:fontFamily="@font/notosanscjkkr_bold"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionMainText" />
@@ -258,7 +258,7 @@
                             android:id="@+id/place_otherTipsDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-17dp"
+                            android:layout_marginTop="-20dp"
                             android:alpha="0.68"
                             android:text="TextView"
                             android:textAppearance="@style/Textstyle_placeDescriptionSubText" />
@@ -297,6 +297,7 @@
                     android:background="#B3000000" />
 
                 <LinearLayout
+                    android:id="@+id/place_usefeeLinear"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
@@ -317,11 +318,11 @@
                         android:layout_weight="1"
                         android:alpha="0.68"
                         android:text="정보를 가져오고 있습니다."
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                         />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/place_usetimeLinear"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
@@ -342,11 +343,11 @@
                         android:layout_weight="1"
                         android:alpha="0.68"
                         android:text="정보를 가져오고 있습니다."
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/place_restdateLinear"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
@@ -368,11 +369,11 @@
                         android:layout_weight="1"
                         android:alpha="0.68"
                         android:text="정보를 가져오고 있습니다."
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/place_parkingLinear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -427,16 +428,17 @@
             <Button
                 android:id="@+id/place_showPlaceDescription"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="13dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginBottom="30dp"
                 android:background="@color/itsability_pink"
                 android:elevation="2dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
-                android:text="사진설명보기"
+                android:text="촬영정보"
                 android:textColor="@android:color/white"
-                android:textSize="10dp" />
+                android:textSize="17dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

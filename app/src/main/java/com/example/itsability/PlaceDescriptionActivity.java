@@ -152,6 +152,8 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         requestInfoQueue = Volley.newRequestQueue(this);
         String url2 = DataFromServer.getTourAPIUrl(locationName);
 
+        Log.d("TAG",url2);
+
         if(url2.isEmpty()) {
             LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_otherInformationLinear);
             linearLayout.setVisibility(View.GONE);
@@ -177,9 +179,23 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
                         if(item.has("usetimeculture")) {extendString = "culture";}
 
-                        usetimeText.setText(item.getString("usetime" + extendString).replaceAll("<br \\/>", ""));
-                        restdateText.setText(item.getString("restdate" + extendString).replaceAll("<br \\/>", ""));
-                        parkingText.setText(item.getString("parking" + extendString).replaceAll("<br \\/>", ""));
+                        if(item.has("usetime" + extendString)) {usetimeText.setText(item.getString("usetime" + extendString).replaceAll("<br \\/>", "")); }
+                        else {
+                            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_usetimeLinear);
+                            linearLayout.setVisibility(View.GONE);
+                        }
+
+                        if(item.has("restdate" + extendString)) {restdateText.setText(item.getString("restdate" + extendString).replaceAll("<br \\/>", "")); }
+                        else {
+                            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_restdateLinear);
+                            linearLayout.setVisibility(View.GONE);
+                        }
+
+                        if(item.has("parking" + extendString)) {parkingText.setText(item.getString("parking" + extendString).replaceAll("<br \\/>", "")); }
+                        else{
+                            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.place_parkingLinear);
+                            linearLayout.setVisibility(View.GONE);
+                        }
 
                         if(item.has("usefee")) { usefeeText.setText(item.getString("usefee").replaceAll("<br \\/>", ""));}
                         else {usefeeText.setText("없음");}
@@ -187,7 +203,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
                         if(item.has("parkingfee")) {parkingfeeText.setText(item.getString("parkingfee").replaceAll("<br \\/>", ""));}
                         else {
                             LinearLayout parkingfeeLinear = (LinearLayout)findViewById(R.id.place_parkingfeeLinear);
-                            parkingfeeLinear.setVisibility(View.INVISIBLE);
+                            parkingfeeLinear.setVisibility(View.GONE);
                         }
 
                     }
