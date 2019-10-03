@@ -43,54 +43,61 @@ public class SplashActivity extends Activity {
 
         context = this;
 
-        try {
+        if(DataFromServer.getDataSize() < 1) {
 
-            //서버에서 데이터를 받아서 저장하는 Thread입니다.
-            Thread dataReadThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //FirebaseFirestore Instance 생성
-                    FirebaseFirestore FirebaseDB = FirebaseFirestore.getInstance();
+            try {
 
-                    //Firestore에서 "data" collection들의 값을 로드합니다.
-                    FirebaseDB.collection("data")
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //서버에서 데이터를 받아서 저장하는 Thread입니다.
+                Thread dataReadThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //FirebaseFirestore Instance 생성
+                        FirebaseFirestore FirebaseDB = FirebaseFirestore.getInstance();
 
-                                    //성공적으로 Firestore에서 값을 불러왔을 경우, 작업을 수행합니다.
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                        //Firestore에서 "data" collection들의 값을 로드합니다.
+                        FirebaseDB.collection("data")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                                            //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
-                                            Map<String, Object> data = document.getData();
-                                            data.remove("PhotoDescription");
-                                            data.remove("PlaceDescription");
-                                            data.remove("W3W");
+                                        //성공적으로 Firestore에서 값을 불러왔을 경우, 작업을 수행합니다.
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                            List<String> w3wData = (List<String>) document.get("W3W");
-                                            Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
-                                            List<Map<String,String>> photoDescriptionData = (List<Map<String,String>>) document.get("PhotoDescription");
+                                                //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
+                                                Map<String, Object> data = document.getData();
+                                                data.remove("PhotoDescription");
+                                                data.remove("PlaceDescription");
+                                                data.remove("W3W");
 
-                                            DataFromServer.addData(data, w3wData, placeDescriptionData, photoDescriptionData, context);
+                                                List<String> w3wData = (List<String>) document.get("W3W");
+                                                Map<String, List<String>> placeDescriptionData = (Map<String, List<String>>) document.get("PlaceDescription");
+                                                List<Map<String, String>> photoDescriptionData = (List<Map<String, String>>) document.get("PhotoDescription");
+
+                                                DataFromServer.addData(data, w3wData, placeDescriptionData, photoDescriptionData, context);
+                                            }
                                         }
                                     }
-                                }
-                            });
-                }
-            });
+                                });
+                    }
+                });
 
-            dataReadThread.start();
-            dataReadThread.join();
+                dataReadThread.start();
+                dataReadThread.join();
 
-            //MainActivity에서 RecyclerView를 만들때까지의 여유시간을 줍니다.
-            Thread.sleep(3000);
-            startActivity(new Intent(this,MainActivity.class));
+                //MainActivity에서 RecyclerView를 만들때까지의 여유시간을 줍니다.
+                Thread.sleep(3000);
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 }
