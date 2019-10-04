@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,13 +57,10 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
     /*
     https://stackoverflow.com/questions/33696488/getting-bitmap-from-vector-drawable
     Vector Drawable에서 Bitmap 객체 받는 방법
-
     https://github.com/mike-jung/DoItAndroid/blob/master/part2/chapter14/SampleLocation/app/src/main/java/org/techtown/location/MainActivity.java
     GPS 설정 및 Auto permission 참고 자료
-
     http://tmapapi.sktelecom.com/main.html#android/docs/androidDoc.TMapView_OnClickListenerCallback
     T-map api 가이드
-
     https://developer.android.com/training/volley/simple#java
     Volley 가이드
      */
@@ -116,7 +114,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
             if(DataFromServer.getAR(locationName) == false) {
                 ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
-                Button arguideButton = (Button)findViewById(R.id.place_show_ar);
+                ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
 
                 arsupportBar.setVisibility(View.GONE);
                 arguideButton.setVisibility(View.GONE);
@@ -268,6 +266,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     public void onButtonShowARClicked(View view) {
         Intent intent = new Intent(getApplicationContext(),CloudAnchorActivity.class);
+        intent.putExtra("locationName",locationName);
         startActivity(intent);
     }
 }
