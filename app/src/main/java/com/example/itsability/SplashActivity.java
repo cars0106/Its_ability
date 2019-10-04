@@ -67,6 +67,8 @@ public class SplashActivity extends Activity {
 
                                                 //"Data" Collection 안에 있는 Document들을 하나씩 가져온 후, DataFromServer에 저장합니다.
                                                 Map<String, Object> data = document.getData();
+
+                                                Log.d("TAG",data.toString());
                                                 data.remove("PhotoDescription");
                                                 data.remove("PlaceDescription");
                                                 data.remove("W3W");

@@ -269,6 +269,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     public void onButtonShowARClicked(View view) {
         Intent intent = new Intent(getApplicationContext(),CloudAnchorActivity.class);
+        intent.putExtra("locationName",locationName);
         startActivity(intent);
     }
 }
