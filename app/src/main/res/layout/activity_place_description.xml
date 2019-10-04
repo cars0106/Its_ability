@@ -307,6 +307,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-15dp"
                     android:alpha="0.8"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:text="한국관광공사 제공"
