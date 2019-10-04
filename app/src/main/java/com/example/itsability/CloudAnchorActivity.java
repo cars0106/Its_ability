@@ -43,7 +43,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceView.Renderer, PrivacyNoticeDialogFragment.NoticeDialogListener {
     private static final String TAG = CloudAnchorActivity.class.getSimpleName();
-    private static final float[] OBJECT_COLOR = new float[] {139.0f, 195.0f, 74.0f, 255.0f};
+    private static final float[] OBJECT_COLOR = new float[] {255.0f, 255.0f, 255.0f, 50.0f};
 
     private enum HostResolveMode {
         NONE,
