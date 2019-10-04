@@ -1,6 +1,5 @@
 package com.example.itsability;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -119,17 +116,14 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
                     .apply(new RequestOptions().transform(new CenterCrop()))
                     .into(placeMainImageView);
 
-            ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
-            ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
-
             if(DataFromServer.getAR(locationName) == false) {
+                ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
+                ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
+
                 arsupportBar.setVisibility(View.GONE);
                 arguideButton.setVisibility(View.GONE);
             }
 
-            else {
-                setStatusBarColor(this, R.color.itsability_purpleblack);
-            }
         }
 
 
@@ -278,12 +272,5 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),CloudAnchorActivity.class);
         intent.putExtra("locationName",locationName);
         startActivity(intent);
-    }
-
-    public static void setStatusBarColor(Activity activity, int color) {
-        Window window = activity.getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(color);
     }
 }
