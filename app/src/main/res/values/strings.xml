@@ -45,23 +45,23 @@
 
     <!-- Strings used in Snackbar messages -->
     <string name="snackbar_anchor_placed">Now hosting anchor...</string>
-    <string name="snackbar_arcore_unavailable">Please install ARCore.</string>
-    <string name="snackbar_arcore_too_old">Please update ARCore.</string>
+    <string name="snackbar_arcore_unavailable">ARCore를 설치해주세요</string>
+    <string name="snackbar_arcore_too_old">ARCore를 업데이트 해주세요.</string>
     <string name="snackbar_arcore_sdk_too_old">Please update the app with a newer version of the ARCore SDK.</string>
-    <string name="snackbar_arcore_exception">This device does not support ARCore.</string>
-    <string name="snackbar_camera_unavailable">Camera unavailable. Please restart the app.</string>
+    <string name="snackbar_arcore_exception">이 디바이스는 ARCore가 지원되지 않습니다.</string>
+    <string name="snackbar_camera_unavailable">카메라를 사용할 수 없습니다. 앱을 재시작해주세요.</string>
     <string name="snackbar_cloud_id_shared">The anchor ID was shared via Firebase.</string>
-    <string name="snackbar_dismiss">Dismiss</string>
-    <string name="snackbar_firebase_error">There was a Firebase Error. Please check Logcat for more details.</string>
+    <string name="snackbar_dismiss">취소</string>
+    <string name="snackbar_firebase_error">서버와 통신에 오류가 발생했습니다.</string>
     <string name="snackbar_host_error">Hosting Error: %1$s</string>
-    <string name="snackbar_initial_message">Please select Host or Resolve to continue.</string>
+    <string name="snackbar_initial_message">Resolve 버튼을 눌러주세요.</string>
     <string name="snackbar_on_host">Now in Hosting Mode. Press Cancel to Exit.</string>
-    <string name="snackbar_on_resolve">Now in Resolving Mode. Press Cancel to Exit.</string>
+    <string name="snackbar_on_resolve">AR 데이터를 로딩하고 있습니다.</string>
     <string name="snackbar_resolve_error">Resolving Error: %1$s</string>
-    <string name="snackbar_resolve_success">The anchor was successfully resolved.</string>
+    <string name="snackbar_resolve_success">AR 데이터 로딩이 완료되었습니다.</string>
     <string name="snackbar_room_code_available">The room code is now available. Please place an anchor to host.</string>
     <!-- Resolve anchor has no result yet. [CHAR_LIMIT=NONE] -->
-    <string name="snackbar_resolve_no_result_yet">Still resolving the anchor. Please make sure you\'re looking at where the Cloud Anchor was hosted. Or, try to re-join the room.</string>
+    <string name="snackbar_resolve_no_result_yet">장소 인식에 시간이 걸리고 있습니다.\디바이스를 사진과 비슷한 장소에 가져가서 상하좌우로 조금만 움직여 주세요.\너무 오래 걸릴 경우, 앱을 재시작해주세요.</string>
 
     <!-- Strings used in privacy notice dialog messages. [CHAR_LIMIT=NONE] -->
     <string name="share_experience_title">Experience it together</string>

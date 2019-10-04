@@ -13,6 +13,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -136,10 +137,12 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
 
         // Initialize UI components.
         hostButton = findViewById(R.id.host_button);
+        hostButton.setVisibility(View.GONE);
         hostButton.setOnClickListener((view) -> onHostButtonPress());
         resolveButton = findViewById(R.id.resolve_button);
         resolveButton.setOnClickListener((view) -> onResolveButtonPress());
         roomCodeText = findViewById(R.id.room_code_text);
+        roomCodeText.setVisibility(View.GONE);
 
         // Initialize Cloud Anchor variables.
         firebaseManager = new FirebaseManager(this);

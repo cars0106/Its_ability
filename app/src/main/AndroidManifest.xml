@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".CloudAnchorActivity"></activity>
-        <activity android:name=".HelloArActivity" />
         <activity
             android:name=".MainMapActivity"
             android:launchMode="singleTask" />
