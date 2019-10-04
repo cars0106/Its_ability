@@ -1,4 +1,4 @@
-package com.example.mylibrary;
+package com.ability.mylibrary;
 
 import android.content.Context;
 

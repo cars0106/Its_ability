@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.itsability"
+        applicationId "com.ability.itsability"
         minSdkVersion 24
         targetSdkVersion 29
         compileSdkVersion 29
@@ -40,6 +40,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation files('lib/com.skt.Tmap_1.60.jar')
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.itsability"
+    package="com.ability.itsability"
     android:installLocation="preferExternal">
 
     <application
@@ -11,27 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CloudAnchorActivity"></activity>
+        <activity android:name="com.ability.itsability.CloudAnchorActivity"></activity>
         <activity
-            android:name=".MainMapActivity"
+            android:name="com.ability.itsability.MainMapActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".MainArActivity"
+            android:name="com.ability.itsability.MainArActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".MainSearchActivity"
+            android:name="com.ability.itsability.MainSearchActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".PlaceDescriptionActivity"
+            android:name="com.ability.itsability.PlaceDescriptionActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".PlaceSearchActivity"
+            android:name="com.ability.itsability.PlaceSearchActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".PhotoDescriptionActivity"
+            android:name="com.ability.itsability.PhotoDescriptionActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.ability.itsability.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.ability.itsability.MainActivity"
             android:launchMode="singleTask" />
 
         <meta-data

@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.example.itsability.SquareImageView
+            <com.ability.itsability.SquareImageView
                 android:id="@+id/recycler_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
