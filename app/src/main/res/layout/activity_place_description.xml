@@ -91,6 +91,16 @@
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
+                    <ImageView
+                        android:id="@+id/place_arsupport_bar"
+                        android:layout_width="70dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/place_placeAddress"
+                        app:layout_constraintStart_toEndOf="@+id/place_placeAddress"
+                        app:layout_constraintTop_toTopOf="@+id/place_placeAddress"
+                        app:srcCompat="@drawable/ic_supportar_bar" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!--

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -113,6 +114,14 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
                     .thumbnail(0.3f)
                     .apply(new RequestOptions().transform(new CenterCrop()))
                     .into(placeMainImageView);
+
+            if(DataFromServer.getAR(locationName) == false) {
+                ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
+                Button arguideButton = (Button)findViewById(R.id.place_show_ar);
+
+                arsupportBar.setVisibility(View.GONE);
+                arguideButton.setVisibility(View.GONE);
+            }
 
         }
 
