@@ -40,7 +40,7 @@
 
     <!-- Strings in the Resolve Dialog Box -->
     <string name="resolve_dialog_ok">Resolve</string>
-    <string name="resolve_dialog_title">Resolve an Anchor</string>
+    <string name="resolve_dialog_title">12를 입력해주세요</string>
     <string name="resolve_dialog_text_hint">Enter Room Code</string>
 
     <!-- Strings used in Snackbar messages -->
@@ -61,7 +61,7 @@
     <string name="snackbar_resolve_success">AR 데이터 로딩이 완료되었습니다.</string>
     <string name="snackbar_room_code_available">The room code is now available. Please place an anchor to host.</string>
     <!-- Resolve anchor has no result yet. [CHAR_LIMIT=NONE] -->
-    <string name="snackbar_resolve_no_result_yet">장소 인식에 시간이 걸리고 있습니다.\디바이스를 사진과 비슷한 장소에 가져가서 상하좌우로 조금만 움직여 주세요.\너무 오래 걸릴 경우, 앱을 재시작해주세요.</string>
+    <string name="snackbar_resolve_no_result_yet">장소 인식에 시간이 걸리고 있습니다.\사진과 비슷한 장소에 가져가서 상하좌우로 조금만 움직여 주세요.</string>
 
     <!-- Strings used in privacy notice dialog messages. [CHAR_LIMIT=NONE] -->
     <string name="share_experience_title">Experience it together</string>

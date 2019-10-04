@@ -141,7 +141,6 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
         hostButton.setVisibility(View.GONE);
         hostButton.setOnClickListener((view) -> onHostButtonPress());
         resolveButton = findViewById(R.id.resolve_button);
-        resolveButton.setVisibility(View.GONE);
         resolveButton.setOnClickListener((view) -> onResolveButtonPress());
         roomCodeText = findViewById(R.id.room_code_text);
         roomCodeText.setVisibility(View.GONE);
@@ -151,11 +150,13 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
         currentMode = HostResolveMode.NONE;
         sharedPreferences = getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
 
+        /*
         Bundle bundle = getIntent().getExtras();
         String locationName = bundle.getString("locationName");
         Log.d("TAG",locationName);
         Log.d("TAG",String.valueOf(DataFromServer.getARRoomNum(locationName)));
         onRoomCodeEntered(DataFromServer.getARRoomNum(locationName));
+         */
     }
 
     @Override
@@ -165,7 +166,7 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
         if (sharedPreferences.getBoolean(ALLOW_SHARE_IMAGES_KEY, false)) {
             createSession();
         }
-        //snackbarHelper.showMessage(this, getString(R.string.snackbar_initial_message));
+        snackbarHelper.showMessage(this, getString(R.string.snackbar_initial_message));
         surfaceView.onResume();
         displayRotationHelper.onResume();
     }
