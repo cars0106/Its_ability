@@ -119,10 +119,10 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
                     .apply(new RequestOptions().transform(new CenterCrop()))
                     .into(placeMainImageView);
 
-            if(DataFromServer.getAR(locationName) == false) {
-                ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
-                ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
+            ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
+            ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
 
+            if(DataFromServer.getAR(locationName) == false) {
                 arsupportBar.setVisibility(View.GONE);
                 arguideButton.setVisibility(View.GONE);
             }
