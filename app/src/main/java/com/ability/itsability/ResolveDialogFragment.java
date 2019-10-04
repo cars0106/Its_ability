@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.ability.itsability.R;
 import com.google.common.base.Preconditions;
 
 public class ResolveDialogFragment extends DialogFragment {

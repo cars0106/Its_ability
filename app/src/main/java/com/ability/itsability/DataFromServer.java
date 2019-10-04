@@ -84,11 +84,6 @@ public class DataFromServer {
         return (boolean)placeData.get(index).get("AR");
     }
 
-    public static long getARRoomNum(String locationName) {
-        int index = placeName.indexOf(locationName);
-        return (long)placeData.get(index).get("ARRoomNum");
-    }
-
     public static String getPlaceLocationDescription(int index) {
         return placeData.get(index).get("PlaceLocationDescription").toString();
     }

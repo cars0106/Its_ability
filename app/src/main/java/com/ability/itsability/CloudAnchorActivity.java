@@ -13,11 +13,11 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ability.itsability.R;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -137,24 +137,15 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
 
         // Initialize UI components.
         hostButton = findViewById(R.id.host_button);
-        hostButton.setVisibility(View.GONE);
         hostButton.setOnClickListener((view) -> onHostButtonPress());
         resolveButton = findViewById(R.id.resolve_button);
-        resolveButton.setVisibility(View.GONE);
         resolveButton.setOnClickListener((view) -> onResolveButtonPress());
         roomCodeText = findViewById(R.id.room_code_text);
-        roomCodeText.setVisibility(View.GONE);
 
         // Initialize Cloud Anchor variables.
         firebaseManager = new FirebaseManager(this);
         currentMode = HostResolveMode.NONE;
         sharedPreferences = getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-
-        Bundle bundle = getIntent().getExtras();
-        String locationName = bundle.getString("locationName");
-        Log.d("TAG",locationName);
-        Log.d("TAG",String.valueOf(DataFromServer.getARRoomNum(locationName)));
-        onRoomCodeEntered(DataFromServer.getARRoomNum(locationName));
     }
 
     @Override
@@ -164,7 +155,7 @@ public class CloudAnchorActivity extends AppCompatActivity implements GLSurfaceV
         if (sharedPreferences.getBoolean(ALLOW_SHARE_IMAGES_KEY, false)) {
             createSession();
         }
-        //snackbarHelper.showMessage(this, getString(R.string.snackbar_initial_message));
+        snackbarHelper.showMessage(this, getString(R.string.snackbar_initial_message));
         surfaceView.onResume();
         displayRotationHelper.onResume();
     }

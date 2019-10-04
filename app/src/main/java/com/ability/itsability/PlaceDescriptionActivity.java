@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.ability.itsability.R;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
@@ -116,7 +116,7 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
             if(DataFromServer.getAR(locationName) == false) {
                 ImageView arsupportBar = (ImageView)findViewById(R.id.place_arsupport_bar);
-                ImageButton arguideButton = (ImageButton)findViewById(R.id.place_show_ar);
+                Button arguideButton = (Button)findViewById(R.id.place_show_ar);
 
                 arsupportBar.setVisibility(View.GONE);
                 arguideButton.setVisibility(View.GONE);
@@ -268,7 +268,6 @@ public class PlaceDescriptionActivity extends AppCompatActivity {
 
     public void onButtonShowARClicked(View view) {
         Intent intent = new Intent(getApplicationContext(),CloudAnchorActivity.class);
-        intent.putExtra("locationName",locationName);
         startActivity(intent);
     }
 }

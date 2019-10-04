@@ -8,9 +8,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:659989827911:android:1ec333068697d1e652fc62",
+        "mobilesdk_app_id": "1:659989827911:android:9b6aa19329e3f74152fc62",
         "android_client_info": {
           "package_name": "com.ability.itsability"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659989827911-u4e6bnt0n77360n4nabugbf3il150trj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZfw9QLL8NVZuXv141HiPIBoeT9-59xTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659989827911-u4e6bnt0n77360n4nabugbf3il150trj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659989827911:android:1ec333068697d1e652fc62",
+        "android_client_info": {
+          "package_name": "com.example.itsability"
         }
       },
       "oauth_client": [

@@ -10,6 +10,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.ability.itsability.R;
+
 public class PrivacyNoticeDialogFragment extends DialogFragment {
     public interface HostResolveListener {
         void onPrivacyNoticeReceived();
