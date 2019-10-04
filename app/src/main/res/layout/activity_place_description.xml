@@ -290,7 +290,7 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="13dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="50dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -303,12 +303,12 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
-                <View
-                    android:id="@+id/divider2"
-                    android:layout_width="25dp"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#B3000000" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="한국관광공사 제공"
+                    android:textSize="10sp" />
 
                 <LinearLayout
                     android:id="@+id/place_usefeeLinear"
@@ -433,36 +433,37 @@
                         android:layout_weight="1"
                         android:alpha="0.68"
                         android:text="정보를 가져오고 있습니다."
-                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText"
-                        />
+                        android:textAppearance="@style/Textstyle_placeDescriptionBottomSubText" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="25dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#B3000000" />
 
             </LinearLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/place_show_ar"
-                android:onClick="onButtonShowARClicked"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="30dp"
                 android:layout_marginEnd="13dp"
-                android:background="@color/itsability_purple"
-                android:elevation="2dp"
-                android:fontFamily="@font/notosanscjkkr_bold"
-                android:text="AR"
-                android:textColor="@android:color/white"
-                android:textSize="17dp" />
+                android:background="@drawable/button_rectangle_purple"
+                app:srcCompat="@drawable/ic_button_arguide"
+                android:onClick="onButtonShowARClicked"/>
 
             <Button
                 android:id="@+id/place_showPlaceDescription"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginBottom="30dp"
-                android:background="@color/itsability_pink"
+                android:background="@drawable/button_rectangle_pink"
                 android:elevation="2dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:text="촬영정보"
